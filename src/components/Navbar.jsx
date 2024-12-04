@@ -2,12 +2,14 @@ import { Link } from 'react-router-dom';
 import logo from '../assets/2.png'
 
 const Navbar = () => {
-    const menu = document.getElementById('navbar-menu');
-
+    
     const handleShowResponsiveNavbar = () => {
+        const menu = document.getElementById('navbar-menu');
         menu.classList.remove('hidden')
     }
     const handleCloseResponsiveNavbar = () => {
+        const menu = document.getElementById('navbar-menu');
+
         menu.classList.add('hidden')
     }
 
@@ -16,11 +18,11 @@ const Navbar = () => {
 
     return (
         <div className='shadow-lg'>
-            <nav className="relative   flex justify-between items-center w-11/12 mx-auto ">
-                <a className="text-3xl font-bold leading-none" href="#">
-                    <img src={logo} alt="" className='w-44' />
+            <nav className="relative   flex justify-between items-center w-11/12 mx-auto py-4 ">
+                <Link to={'/'} className="text-3xl font-bold leading-none" href="#">
+                    <img src={logo} alt="" className='w-40' />
 
-                </a>
+                </Link>
                 <div className="lg:hidden">
                     <button onClick={handleShowResponsiveNavbar} id='navbar-burger' className=" flex items-center text-white p-3">
                         <svg className="block h-4 w-4 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -56,8 +58,8 @@ const Navbar = () => {
                     </li>
                     <li><a className="text-sm text-gray-400 hover:text-gray-500" href="#">Contact</a></li>
                 </ul>
-                <a className="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold  rounded-xl transition duration-200" href="#">Sign In</a>
-                <a className="hidden lg:inline-block py-2 px-6 bg-blue-500 hover:bg-blue-600 text-sm text-white font-bold rounded-xl transition duration-200" href="#">Sign up</a>
+                <Link to={'/login'} className="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold  rounded-xl transition duration-200" href="#">Sign In</Link>
+                <Link to={'/register'} className="hidden lg:inline-block py-2 px-6 bg-blue-500 hover:bg-blue-600 text-sm text-white font-bold rounded-xl transition duration-200" href="#">Sign up</Link>
             </nav>
             <div id='navbar-menu' className=" relative z-50 hidden">
                 <div id='navbar-backdrop' onClick={handleCloseResponsiveNavbar} className="  fixed inset-0 bg-gray-800 opacity-25"></div>
@@ -93,12 +95,10 @@ const Navbar = () => {
                     </div>
                     <div className="mt-auto">
                         <div className="pt-6">
-                            <a className="block px-4 py-3 mb-3 leading-loose text-xs text-center font-semibold leading-none bg-gray-50 hover:bg-gray-100 rounded-xl" href="#">Sign in</a>
-                            <a className="block px-4 py-3 mb-2 leading-loose text-xs text-center text-white font-semibold bg-blue-600 hover:bg-blue-700  rounded-xl" href="#">Sign Up</a>
+                            <Link to={'/login'} className="block px-4 py-3 mb-3 leading-loose text-xs text-center font-semibold leading-none bg-gray-50 hover:bg-gray-100 rounded-xl" href="#">Sign in</Link>
+                            <Link to={'/register'} className="block px-4 py-3 mb-2 leading-loose text-xs text-center text-white font-semibold bg-blue-600 hover:bg-blue-700  rounded-xl" href="#">Sign Up</Link>
                         </div>
-                        <p className="my-4 text-xs text-center text-gray-400">
-                            <span>Copyright © 2021</span>
-                        </p>
+                        
                     </div>
                 </nav>
             </div>

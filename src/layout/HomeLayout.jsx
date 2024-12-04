@@ -2,6 +2,7 @@ import React from 'react';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import { Outlet } from 'react-router-dom';
+import { Rating } from 'react-simple-star-rating';
 
 const HomeLayout = () => {
     return (
@@ -13,7 +14,8 @@ const HomeLayout = () => {
                 <Navbar></Navbar>
             </nav>
         </header>
-        <main className='md:w-11/12 mx-auto font-mono'>
+        <main className=' font-mono'>
+       
             <Outlet></Outlet>
         </main>
         <footer>
