@@ -1,32 +1,107 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import toast from 'react-hot-toast';
 
 // import ReactStars from "react-rating-stars-component";
 import { Rating } from 'react-simple-star-rating'
+import { AuthContext } from '../provider/AuthProvider';
+import { useNavigate } from 'react-router-dom';
 
 
 const AddMovie = () => {
+    const navigate = useNavigate()
+    const {user} = useContext(AuthContext)
     const [selectedYear, setSelectedYear] = useState(null);
     const [rating, setRating] = useState(0);
+    const [error, setError] = useState({})
 
-   
+
+    const validateUrl = (url) => {
+        try {
+          new URL(url); 
+          return true;
+        } catch (error) {
+          return false;
+        }
+      };
+    const handleMovieAdd = (e) =>{
+        e.preventDefault();
+        const form = e.target;
+        const poster = (form.poster.value);
+        const title = form.title.value;
+        const genre = form.genre.value;
+        const duration = form.duration.value;
+        const summary = form.summary.value;
+       if(!validateUrl(poster)){
+        return setError({poster: "Provide a valid url link."})
+       }
+       if(!title || title.length < 2){
+        return setError({title: "The title must be at least 2 characters long."})
+       }
+       if(!duration || duration < 60){
+        return setError({duration:"Duration must be greater than 60 minutes"})
+       }
+       if(!selectedYear){
+        return setError({year:"The Release Year field cannot be empty. Please select a valid year."})
+       }
+       if(!rating){
+        return setError({rating: "You must choose a rating to proceed."})
+       }
+       if(!summary || summary.length < 10){
+        return setError({summary: "The summary field requires a non-empty value with at least 10 characters to proceed."})
+       }
+       else{
+        setError({poster:null})
+       }
+       const year = selectedYear.getFullYear()
+        // console.log(user.email);
+        const email = user.email
+       const newMovie = {poster, title, genre, duration, year, rating, email }
+       fetch('http://localhost:5000/add-movie', {
+        method:'POST',
+        headers:{
+            'content-type':'application/json',
+        },
+        body: JSON.stringify(newMovie)
+       })
+       .then(res => res.json())
+       .then(data => {
+        console.log(data);
+        if(data.acknowledged && data.insertedId ){
+            toast.success("Succssfully Added Movie")
+            navigate('/all-movies')
+        }
+       })
+
+    }
+    // console.log(rating, selectedYear);
 
     return (
         <div>
 
             <section className="max-w-4xl p-6 mx-auto bg-indigo-600 rounded-md shadow-md dark:bg-gray-800 my-10">
                 <h1 className="text-xl font-bold text-white capitalize dark:text-white">Add Movie </h1>
-                <form>
+                <form method='post' onSubmit={handleMovieAdd}>
                     <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
                         <div>
                             <label className="text-white dark:text-gray-200" >Movie Poster Url</label>
                             <input id="poster-url" name='poster' type="text" placeholder='e.g https://example.jpg' className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring" />
+                         {
+                            error && error?.poster && <p className='text-red-400'>
+                                 {error.poster}
+                                 </p>
+                         }
                         </div>
 
                         <div>
                             <label className="text-white dark:text-gray-200" >Movie Title</label>
-                            <input id="movie-title" type="text" placeholder='Enter movie title' className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring" />
+                            <input id="movie-title" type="text" name='title' placeholder='Enter movie title' className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring" />
+                            {
+                            error && error?.title && <p className='text-red-400'>
+                                 {error.title}
+                                 </p>
+                         }
                         </div>
                         <div>
                             <label className="text-white dark:text-gray-200" >Choose a Genre</label>
@@ -51,7 +126,12 @@ const AddMovie = () => {
                         <div>
                             <label className="text-white dark:text-gray-200" >Duration(must be greater than 60 minutes)</label>
 
-                            <input id="duration" type="number" name="duration" min="60" placeholder="Enter duration (e.g 120)" required className="block w-full py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring" />
+                            <input id="duration" type="number" name="duration" min="60" placeholder="Enter duration (e.g 120)" className="block w-full py-2 px-4 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring" />
+                            {
+                            error && error?.duration && <p className='text-red-400'>
+                                 {error.duration}
+                                 </p>
+                         }
                         </div>
                         <div>
                             <label className="text-white dark:text-gray-200" for="passwordConfirmation">Release Year</label> <br />
@@ -62,70 +142,54 @@ const AddMovie = () => {
                                 showYearPicker
                                 dateFormat="yyyy"
                                 placeholderText="Select a year"
-
-                                required />
+                                name='dateData'
+                                 />
 
                             </div>
+                            {
+                            error && error?.year && <p className='text-red-400'>
+                                 {error.year}
+                                 </p>
+                         }
                         </div>
 
 
                         <div>
                             <label className="text-white dark:text-gray-200" > Give Your Rating</label>
                             <div className="rating-container">
-                                <Rating
+                                <Rating  onClick={(rate) => setRating(rate)}
+                                  ratingValue={rating}
                                     showTooltip
                                     tooltipArray={['Terrible', 'Bad', 'Average', 'Great', 'Prefect']}
                                 ></Rating>
 
                             </div>
+                            {
+                            error && error?.rating && <p className='text-red-400'>
+                                 {error.rating}
+                                 </p>
+                         }
                         </div>
 
 
 
                         <div className='md:col-span-2'>
                             <label className="text-white dark:text-gray-200" for="passwordConfirmation">Add Summary</label>
-                            <textarea id="textarea" type="textarea" rows={'6'} className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"></textarea>
+                            <textarea name='summary' id="textarea" type="textarea" rows={'6'} className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"></textarea>
+                            {
+                            error && error?.summary && <p className='text-red-400'>
+                                 {error.summary}
+                                 </p>
+                         }
                         </div>
 
                     </div>
 
                     <div className="flex justify-start mt-6">
-                        <button className="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-pink-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600">Save</button>
+                        <button className="px-8 py-2 leading-5 text-black font-bold text-xl transition-colors duration-200 transform bg-gradient-to-r  from-[#5FE1E7] to-[#D3F46D] hover:bg-pink-700 focus:outline-none focus:bg-gray-600">Add Movie</button>
                     </div>
                 </form>
             </section>
-
-            {/* <section className="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800 mt-20">
-                <h2 className="text-lg font-semibold text-gray-700 capitalize dark:text-white">Account settings</h2>
-
-                <form>
-                    <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
-                        <div>
-                            <label className="text-gray-700 dark:text-gray-200" for="username">Username</label>
-                            <input id="username" type="text" className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
-                        </div>
-
-                        <div>
-                            <label className="text-gray-700 dark:text-gray-200" for="emailAddress">Email Address</label>
-                            <input id="emailAddress" type="email" className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
-                        </div>
-
-                        <div>
-                            <label className="text-gray-700 dark:text-gray-200" for="password">Password</label>
-                            <input id="password" type="password" className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
-                        </div>
-
-                        <div>
-                            <label className="text-gray-700 dark:text-gray-200" for="passwordConfirmation">Password Confirmation</label>
-                            <input id="passwordConfirmation" type="password" className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
-                        </div>
-                    </div>
-
-                    <div className="flex justify-end mt-6">
-                        <button className="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">Save</button>
-                    </div>
-                </form>
-            </section> */}
         </div >
     );
 };

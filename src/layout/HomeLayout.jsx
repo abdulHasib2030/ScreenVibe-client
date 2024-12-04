@@ -6,6 +6,7 @@ import { Rating } from 'react-simple-star-rating';
 import toast, { Toaster } from 'react-hot-toast';
 import { AuthContext } from '../provider/AuthProvider';
 import Loading from '../pages/Loading';
+import Banner from '../components/Banner';
 const HomeLayout = () => {
     const {loading} = useContext(AuthContext)
     if(loading){
@@ -20,6 +21,7 @@ const HomeLayout = () => {
             <nav>
                 <Navbar></Navbar>
             </nav>
+            <Banner></Banner>
         </header>
         <main className=' font-mono'>
        

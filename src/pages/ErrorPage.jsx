@@ -15,7 +15,7 @@ const ErrorPage = () => {
             
             <button
                 onClick={handleGoBackHome}
-                className="bg-gradient-to-r from-indigo-300 to-purple-400 font-bold text-white py-2 px-6 rounded-lg shadow-md "
+                className="bg-gradient-to-r  from-[#5FE1E7] to-[#D3F46D] font-bold text-black py-2 px-6 rounded-lg shadow-md "
             >
                 Go to Homepage
             </button>
