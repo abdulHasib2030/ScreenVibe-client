@@ -7,6 +7,8 @@ import HomeLayout from "../layout/HomeLayout";
 import AddMovie from "../pages/AddMovie";
 import SignIn from "../pages/SignIn";
 import SignUp from "../pages/SignUp";
+import LoginRedirect from "../components/LogRedirect";
+import PrivateRoute from "./PrivateRoute";
   
 const Route = createBrowserRouter([
     {
@@ -20,15 +22,21 @@ const Route = createBrowserRouter([
             // },
             {
                 path: '/add-movie',
-                element: <AddMovie></AddMovie>,
+                element: <PrivateRoute>
+                    <AddMovie></AddMovie>
+                </PrivateRoute>,
             },
             {
                 path: '/login',
-                element: <SignIn></SignIn>
+                element: <LoginRedirect>
+                    <SignIn></SignIn>
+                </LoginRedirect>
             },
             {
                 path: '/register',
-                element: <SignUp></SignUp>
+                element: <LoginRedirect>
+                    <SignUp></SignUp>
+                </LoginRedirect>
             },
         ]
     }

@@ -1,8 +1,39 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import image from '../assets/loginImg.jpg'
 import { FcGoogle } from "react-icons/fc";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../provider/AuthProvider';
+import toast from 'react-hot-toast';
 const SignIn = () => {
+   const {setUser, userLogin,  googleAuth} = useContext(AuthContext)
+   const navigate = useNavigate()
+
+  const handleUserLogin = (e) =>{
+    e.preventDefault()
+    const form = e.target;
+     const email = (form.email.value);
+     const password = (form.password.value);
+    userLogin(email, password)
+    .then(result =>{
+      setUser(result.user)
+      toast.success("Successfully login")
+      navigate('/')
+    })
+    .catch(err =>{
+      toast.error("Invalid credentials")
+    })
+  }
+
+  const handleGoogleAuth = () =>{
+    googleAuth()
+    .then(result => {
+        setUser(result.user)
+         navigate('/')
+    })
+    .catch(error =>{
+        setError({user: error.message})
+    })
+}
     return (
         <div>
         
@@ -22,7 +53,7 @@ const SignIn = () => {
 
       <h1 className="text-xl md:text-2xl font-bold leading-tight mt-12">Log in to your account</h1>
 
-      <form className="mt-6" action="#" method="POST">
+      <form className="mt-6" method='post'  onSubmit={handleUserLogin}>
         <div>
           <label className="block text-gray-700">Email Address</label>
           <input type="email" name="email" id="" placeholder="Enter Email Address" className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none"  />
@@ -35,7 +66,7 @@ const SignIn = () => {
         </div>
 
         <div className="text-right mt-2">
-          <a href="#" className="text-sm font-semibold text-gray-700 hover:text-blue-700 focus:text-blue-700">Forgot Password?</a>
+          <a className="text-sm font-semibold text-gray-700 hover:text-blue-700 focus:text-blue-700">Forgot Password?</a>
         </div>
 
         <button type="submit" className="w-full block bg-indigo-500 hover:bg-indigo-400 focus:bg-indigo-400 text-white font-semibold rounded-lg
@@ -45,8 +76,9 @@ const SignIn = () => {
 
       {/* <hr className="my-6 border-gray-300 w-full"> */}
 
-      <button type="button" className="w-full block bg-white hover:bg-gray-100 focus:bg-gray-100 text-gray-900 font-semibold rounded-lg px-4 py-3 border border-gray-300">
+      <button onClick={handleGoogleAuth} className="w-full block bg-white hover:bg-gray-100 focus:bg-gray-100 text-gray-900 font-semibold rounded-lg px-4 py-3 border border-gray-300">
             <div className="flex items-center justify-center">
+              
 			<FcGoogle />
             <span className="ml-4">
             Log in

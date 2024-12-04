@@ -1,15 +1,22 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import { Outlet } from 'react-router-dom';
 import { Rating } from 'react-simple-star-rating';
-
+import toast, { Toaster } from 'react-hot-toast';
+import { AuthContext } from '../provider/AuthProvider';
+import Loading from '../pages/Loading';
 const HomeLayout = () => {
+    const {loading} = useContext(AuthContext)
+    if(loading){
+        return <Loading></Loading>
+    }
     return (
         <div >
         {/* <Toaster></Toaster> */}
         {/* <ToastContainer></ToastContainer> */}
         <header className=' font-mono '>
+        <Toaster />
             <nav>
                 <Navbar></Navbar>
             </nav>

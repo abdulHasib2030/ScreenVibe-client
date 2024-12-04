@@ -1,8 +1,11 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import logo from '../assets/2.png'
+import { useContext } from 'react';
+import { AuthContext } from '../provider/AuthProvider';
 
 const Navbar = () => {
-    
+    const { user , logOutUser} = useContext(AuthContext)
+    const navigate = useNavigate()
     const handleShowResponsiveNavbar = () => {
         const menu = document.getElementById('navbar-menu');
         menu.classList.remove('hidden')
@@ -13,7 +16,10 @@ const Navbar = () => {
         menu.classList.add('hidden')
     }
 
-
+   const handleUserLogout = () => {
+    logOutUser()
+    navigate('/')   
+}
 
 
     return (
@@ -58,8 +64,23 @@ const Navbar = () => {
                     </li>
                     <li><a className="text-sm text-gray-400 hover:text-gray-500" href="#">Contact</a></li>
                 </ul>
-                <Link to={'/login'} className="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold  rounded-xl transition duration-200" href="#">Sign In</Link>
-                <Link to={'/register'} className="hidden lg:inline-block py-2 px-6 bg-blue-500 hover:bg-blue-600 text-sm text-white font-bold rounded-xl transition duration-200" href="#">Sign up</Link>
+                {
+                    user ?
+                        <div className='  hidden lg:inline-block '>
+                            <div className="avatar flex gap-5">
+                                <div className="ring-primary ring-offset-base-100 w-10 rounded-full ring ring-offset-2">
+                                    <img src={user?.photoURL} />
+                                </div>
+                            <button onClick={handleUserLogout} className="hidden lg:inline-block py-2 px-6 bg-gradient-to-r  from-[#5FE1E7] to-[#D3F46D] text-black font-bold  transition duration-200">
+                                Logout
+                            </button>
+                            </div>
+                        </div>
+                        : <div className='hidden lg:inline-block' >
+
+                            <Link to={'/login'} className=" lg:ml-auto lg:mr-3 py-2 px-6  hover:bg-[#5FE1E7] bg-gradient-to-r to-[#5FE1E7] from-[#D3F46D] text-black font-bold   transition duration-200" href="#">Sign In</Link>
+                            <Link to={'/register'} className=" py-2 px-6 bg-gradient-to-r  from-[#5FE1E7] to-[#D3F46D] text-black font-bold   transition duration-200" href="#">Sign up</Link>
+                        </div>}
             </nav>
             <div id='navbar-menu' className=" relative z-50 hidden">
                 <div id='navbar-backdrop' onClick={handleCloseResponsiveNavbar} className="  fixed inset-0 bg-gray-800 opacity-25"></div>
@@ -94,11 +115,25 @@ const Navbar = () => {
                         </ul>
                     </div>
                     <div className="mt-auto">
-                        <div className="pt-6">
-                            <Link to={'/login'} className="block px-4 py-3 mb-3 leading-loose text-xs text-center font-semibold leading-none bg-gray-50 hover:bg-gray-100 rounded-xl" href="#">Sign in</Link>
-                            <Link to={'/register'} className="block px-4 py-3 mb-2 leading-loose text-xs text-center text-white font-semibold bg-blue-600 hover:bg-blue-700  rounded-xl" href="#">Sign Up</Link>
-                        </div>
-                        
+                        {
+                            user ?
+                                <div className='flex justify-between'>
+                                    <div className="avatar">
+                                        <div className="ring-primary ring-offset-base-100 w-16 rounded-full ring ring-offset-2">
+                                            <img src={user?.photoURL} />
+
+                                        </div>
+                                    </div>
+                                    <button onClick={handleUserLogout} className="block mb-2 leading-loose ext-center px-6  font-bold bg-gradient-to-r  from-[#5FE1E7] to-[#D3F46D] text-black ">
+                                        Logout
+                                    </button>
+                                </div> :
+                                <div className="pt-6">
+                                    <Link to={'/login'} className="block px-4 py-3 mb-3 leading-loose text-center text-black font-semibold  bg-gradient-to-r  from-[#5FE1E7] to-[#D3F46D]" href="#">Sign in</Link>
+                                    <Link to={'/register'} className="block px-4 py-3 mb-2 leading-loose  text-center text-black font-semibold bg-gradient-to-r  from-[#5FE1E7] to-[#D3F46D]" href="#">Sign Up</Link>
+                                </div>
+                        }
+
                     </div>
                 </nav>
             </div>
