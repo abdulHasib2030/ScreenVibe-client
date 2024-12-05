@@ -23,7 +23,7 @@ const Route = createBrowserRouter([
             {
                 path: '/',
                 element:<Home></Home>,
-
+                loader: () => fetch('http://localhost:5000'),
             },
             {
                 path: '/add-movie',

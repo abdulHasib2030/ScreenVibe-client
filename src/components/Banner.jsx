@@ -15,7 +15,7 @@ const Banner = () => {
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
     return (
-        <div className='relative'>
+        <div >
 
 
 
@@ -31,7 +31,7 @@ const Banner = () => {
                 className="mySwiper2 "
             >
                 <SwiperSlide>
-                    <div className='absolute top-[20%] left-[35%] space-y-4'>
+                    <div className='absolute top-[30%] md:top-[20%] md:left-[35%] left-[20%] space-y-4'>
                         <h1 className='text-5xl text-white font-bold'>American Made</h1>
                         <ul className='flex text-[14px] text-white'>
                             <li>2017</li> <div className='divider divider-horizontal  divider-primary'></div>
@@ -47,7 +47,7 @@ const Banner = () => {
                     <img src="https://vodi.madrasthemes.com/main/wp-content/uploads/sites/2/2019/04/slider-8-1.jpg" />
                 </SwiperSlide>
                 <SwiperSlide>
-                <div className='absolute top-[20%] left-[35%] space-y-4'>
+                <div className='absolute top-[30%] md:top-[20%] md:left-[35%] left-[20%] space-y-4'>
                         <h1 className='text-5xl text-white font-bold'>The Convenient Groom</h1>
                         <ul className='flex text-[14px] text-white'>
                             <li>2016</li> <div className='divider divider-horizontal  divider-primary'></div>
@@ -63,7 +63,7 @@ const Banner = () => {
                     <img src="https://vodi.madrasthemes.com/main/wp-content/uploads/sites/2/2019/04/slider-1-1.jpg" />
                 </SwiperSlide>
                 <SwiperSlide>
-                <div className='absolute top-[20%] left-[35%] space-y-4'>
+                <div className='absolute top-[30%] md:top-[20%] md:left-[35%] left-[20%] space-y-4'>
                         <h1 className='text-5xl text-white font-bold'>Black Mirror</h1>
                         <ul className='flex text-[14px] text-white'>
                             <li>2018</li> <div className='divider divider-horizontal  divider-primary'></div>
@@ -80,6 +80,9 @@ const Banner = () => {
                 </SwiperSlide>
 
             </Swiper>
+<div>
+
+
 
             <Swiper
                 onSwiper={setThumbsSwiper}
@@ -88,7 +91,7 @@ const Banner = () => {
                 freeMode={true}
                 watchSlidesProgress={true}
                 modules={[FreeMode, Navigation, Thumbs]}
-                className="md:w-1/2  md:absolute lg:h-44 md:h-32 h-32  md:-top-60 md:-right-44 lg:-right-56 object-cover"
+                className="md:w-1/2  absolute lg:h-44 md:h-32 h-32  md:-top-60 md:-right-44 lg:-right-56 object-cover"
             >
 
 
@@ -103,7 +106,7 @@ const Banner = () => {
                 </SwiperSlide>
 
             </Swiper>
-
+            </div>
 
         </div>
     );
