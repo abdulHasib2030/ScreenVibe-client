@@ -57,7 +57,7 @@ const AddMovie = () => {
        const year = selectedYear.getFullYear()
         // console.log(user.email);
         const email = user.email
-       const newMovie = {poster, title, genre, duration, year, rating, email }
+       const newMovie = {poster, title, genre, duration, year, rating,summary, email }
        fetch('http://localhost:5000/add-movie', {
         method:'POST',
         headers:{

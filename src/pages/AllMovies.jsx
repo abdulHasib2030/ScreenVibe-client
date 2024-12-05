@@ -11,7 +11,7 @@ const AllMovies = () => {
             <div className=' md:container mx-auto w-[90%]'>
                 <h1 className='text-4xl font-bold'>All Movies</h1>
                 <div className='divider'></div>
-            <div className='grid md:grid-cols-3 grid-cols-1 gap-4 items-center'>
+            <div className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4 items-center'>
                 {
                     loadData.map(item =>   
                     <div className="card card-compact text-black   bg-gradient-to-r  to-[#5FE1E7] from-[#D3F46D] rounded-none  ">
@@ -26,13 +26,13 @@ const AllMovies = () => {
                             <p> <span className='text-lg font-semibold text-black'>Genre:</span> {item.genre}</p>
                             <p> <span className='text-lg font-semibold text-black'> Duration:</span> {item.duration} minutes</p>
                             <p> <span className='text-lg font-semibold text-black'> Release Year:</span> {item.year}</p>
-                            <div className='rating-container'>
+                            </div>
+                            <div className='rating-container'> <span className='text-lg font-semibold text-black'> Rating:</span> 
         
-                            <Rating  initialValue={item.rating} 
-                             readonly 
+                            <Rating  initialValue={item.rating} tooltipArray={['Terrible', 'Bad', 'Average', 'Great', 'Prefect']}
+                             readonly  showTooltip
                             ></Rating>
 
-                            </div>
                             </div>
                             <Link to={`/movie-details/${item._id}`} className="block px-4 py-3 mb-3 text-xl  text-center text-white font-semibold   btn">See Detail</Link>
 
