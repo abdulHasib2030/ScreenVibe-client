@@ -1,15 +1,46 @@
 import React from 'react';
-import { Link, useLoaderData } from 'react-router-dom';
+import { MdDeleteOutline } from 'react-icons/md';
+import { Link, useLoaderData, useNavigate } from 'react-router-dom';
 import { Rating } from 'react-simple-star-rating';
+import Swal from 'sweetalert2'
 
-const AllMovies = () => {
+const Favorites = () => {
     const loadData = useLoaderData()
-    console.log(loadData);
-
+    const navigate = useNavigate()
+    const handleDeleteFavorite = (id) =>{
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`http://localhost:5000/favorite-delete/${id}`, {
+                    method: 'DELETE',
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        if (data.deletedCount > 0) {
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Favorite movie has been deleted.",
+                                icon: "success"
+                            }
+                            )
+                            navigate('/all-movies')
+                        }
+                    })
+            }
+        })
+    }
     return (
         <div className='my-20'>
             <div className=' md:container mx-auto w-[90%]'>
-                <h1 className='text-4xl font-bold'>All Movies</h1>
+                <h1 className='text-4xl font-bold'>Favorites Movies</h1>
                 <div className='divider'></div>
             <div className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4 items-center'>
                 {
@@ -35,6 +66,7 @@ const AllMovies = () => {
 
                             </div>
                             <Link to={`/movie-details/${item._id}`} className="block px-4 py-1 my-3   text-center text-white font-semibold  bg-[#333333]  hover:opacity-70 hover:rounded-2xl hover:transform hover:duration-200 ">See Detail</Link>
+                            <button onClick={()=>handleDeleteFavorite(item._id)}  className="block px-4 py-1 my-3   text-center text-white font-semibold  bg-red-500  hover:opacity-70 hover:rounded-2xl hover:transform hover:duration-200 flex gap-3">Delete Favorite <MdDeleteOutline className='text-2xl' /></button>
 
                             
                             
@@ -50,4 +82,4 @@ const AllMovies = () => {
     );
 };
 
-export default AllMovies;
+export default Favorites;

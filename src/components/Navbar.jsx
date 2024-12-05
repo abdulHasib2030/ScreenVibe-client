@@ -1,10 +1,18 @@
 import { Link, useNavigate } from 'react-router-dom';
 import logo from '../assets/2.png'
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { AuthContext } from '../provider/AuthProvider';
 
 const Navbar = () => {
     const { user , logOutUser} = useContext(AuthContext)
+    const navData = {
+        home:true,
+        allMovie:false,
+        addMovie:false,
+        favMovie:false,
+        contact: false,
+    }
+    const [navActive, setNavActive] =useState([true, false, false, false, false])
     const navigate = useNavigate()
     const handleShowResponsiveNavbar = () => {
         const menu = document.getElementById('navbar-menu');
@@ -21,7 +29,30 @@ const Navbar = () => {
     navigate('/')   
 }
 
-
+// Nav item color active 
+    const bgColorActive = (item) =>{
+     if (item == 'home'){
+        const temp  = [true, false, false, false, false]
+        setNavActive(temp)
+     }
+     else if(item == 'all'){
+        const temp  = [false, true, false, false, false]
+        setNavActive(temp)
+     }
+     else if(item == 'add'){
+        const temp  = [false, false, true, false, false]
+        setNavActive(temp)
+     }
+     else if(item == 'fav'){
+        const temp  = [false, false, false, true, false]
+        setNavActive(temp)
+     }
+     else if(item == 'contact'){
+        const temp  = [false, false, false, false, true]
+        setNavActive(temp)
+     }
+    }
+console.log(navActive[0]);
     return (
         <div className='shadow-lg'>
             <nav className="relative   flex justify-between items-center w-11/12 mx-auto py-4 ">
@@ -37,32 +68,32 @@ const Navbar = () => {
                         </svg>
                     </button>
                 </div>
-                <ul className="hidden absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 lg:flex lg:mx-auto lg:flex lg:items-center lg:w-auto lg:space-x-6">
-                    <li><Link to={'/'} className="text-sm text-gray-400 hover:text-gray-500" href="#">Home</Link></li>
+                <ul  className="hidden absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 lg:flex lg:mx-auto lg:flex lg:items-center lg:w-auto lg:space-x-6">
+                    <li><Link to={'/'} onClick={()=>bgColorActive('home')} className={`text-sm ${navActive[0]? 'text-blue-600':''}  hover:text-gray-500`} href="#">Home</Link></li>
                     <li className="text-gray-300">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" className="w-4 h-4 current-fill" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
                         </svg>
                     </li>
-                    <li><Link to={'/all-movies'} className="text-sm text-blue-600 font-bold" href="#">All Movies</Link></li>
+                    <li><Link to={'/all-movies'} onClick={()=>bgColorActive("all")} className={`text-sm ${navActive[1]? 'text-blue-600':''} hover:text-gray-500 font-bold`} href="#">All Movies</Link></li>
                     <li className="text-gray-300">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" className="w-4 h-4 current-fill" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
                         </svg>
                     </li>
-                    <li><Link to={'/add-movie'} className="text-sm text-gray-400 hover:text-gray-500" href="#">Add Movie</Link></li>
+                    <li><Link to={'/add-movie'} onClick={()=>bgColorActive("add")} className={`text-sm ${navActive[2]? 'text-blue-600':''} hover:text-gray-500 font-bold`} href="#">Add Movie</Link></li>
                     <li className="text-gray-300">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" className="w-4 h-4 current-fill" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
                         </svg>
                     </li>
-                    <li><a className="text-sm text-gray-400 hover:text-gray-500" href="#">My Favorites</a></li>
+                    <li><Link to={`/my-favorite/${user?.email}`} onClick={()=>bgColorActive("fav")} className={`text-sm ${navActive[3]? 'text-blue-600':''} hover:text-gray-500 font-bold`} href="#">My Favorites</Link></li>
                     <li className="text-gray-300">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" className="w-4 h-4 current-fill" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
                         </svg>
                     </li>
-                    <li><a className="text-sm text-gray-400 hover:text-gray-500" href="#">Contact</a></li>
+                    <li><a onClick={()=>bgColorActive("contact")} className={` ${navActive[4]? 'text-blue-600':''} hover:text-gray-500 font-bold`} href="#">Contact</a></li>
                 </ul>
                 {
                     user ?
@@ -96,21 +127,21 @@ const Navbar = () => {
                         </button>
                     </div>
                     <div>
-                        <ul>
+                        <ul >
                             <li className="mb-1">
-                                <Link to={'/'} className="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" >Home</Link>
+                                <Link to={'/'} onClick={()=>bgColorActive("home")} className="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" >Home</Link>
                             </li>
                             <li className="mb-1">
-                                <Link to={'/all-movies'}  className="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" href="#">All Movies</Link>
+                                <Link to={'/all-movies'} onClick={()=>bgColorActive("all")}  className="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" href="#">All Movies</Link>
                             </li>
                             <li className="mb-1">
-                                <Link to={'add-movie'} className="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" href="#">Add Movie</Link>
+                                <Link to={'add-movie'} onClick={()=>bgColorActive("add")} className="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" href="#">Add Movie</Link>
                             </li>
                             <li className="mb-1">
-                                <a className="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" href="#">My Favorites</a>
+                                <Link to={`/my-favorite/${user?.email}`} onClick={()=>bgColorActive("fav")} className="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" >My Favorites</Link>
                             </li>
                             <li className="mb-1">
-                                <a className="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" href="#">Contact</a>
+                                <a onClick={()=>bgColorActive("contact")} className="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" href="#">Contact</a>
                             </li>
                         </ul>
                     </div>

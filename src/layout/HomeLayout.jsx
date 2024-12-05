@@ -21,7 +21,7 @@ const HomeLayout = () => {
             <nav>
                 <Navbar></Navbar>
             </nav>
-            <Banner></Banner>
+        
         </header>
         <main className=' font-mono'>
        

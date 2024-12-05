@@ -11,6 +11,8 @@ import LoginRedirect from "../components/LogRedirect";
 import PrivateRoute from "./PrivateRoute";
 import AllMovies from "../pages/AllMovies";
 import DetailsMovie from "../pages/DetailsMovie";
+import Favorites from "../pages/Favorites";
+import Home from "../pages/Home";
 
 const Route = createBrowserRouter([
     {
@@ -18,10 +20,11 @@ const Route = createBrowserRouter([
         errorElement: <ErrorPage></ErrorPage>,
         element: <HomeLayout></HomeLayout>,
         children: [
-            // {
-            //     path: '/',
+            {
+                path: '/',
+                element:<Home></Home>,
 
-            // },
+            },
             {
                 path: '/add-movie',
                 element: <PrivateRoute>
@@ -48,9 +51,16 @@ const Route = createBrowserRouter([
             {
                 path: '/movie-details/:id',
                 element: <PrivateRoute>
-                    <DetailsMovie></DetailsMovie>,
+                    <DetailsMovie></DetailsMovie>
                 </PrivateRoute>,
-                loader: ({params}) => fetch(`http://localhost:5000/movie-details/${params.id}`),
+                loader: ({ params }) => fetch(`http://localhost:5000/movie-details/${params.id}`),
+            },
+            {
+                path: '/my-favorite/:email',
+                element: <PrivateRoute>
+                   <Favorites></Favorites>
+                </PrivateRoute>,
+                loader: ({params}) => fetch(`http://localhost:5000/my-favorite/${params.email}`),
             }
         ]
     }
