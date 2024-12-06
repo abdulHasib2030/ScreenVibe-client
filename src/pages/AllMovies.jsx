@@ -3,7 +3,7 @@ import { Link, useLoaderData } from 'react-router-dom';
 import { Rating } from 'react-simple-star-rating';
 
 const AllMovies = () => {
-    const loadData = useLoaderData()
+    const {result:loadData} = useLoaderData()
     console.log(loadData);
 
     return (

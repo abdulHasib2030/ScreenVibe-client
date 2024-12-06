@@ -5,7 +5,7 @@ import { Rating } from 'react-simple-star-rating';
 const FeatureMovie = ({data}) => {
     return (
         <div className='relative md:-top-24 mt-6 md:mt-0'>
-            <h1 className='text-center text-5xl  font-bold font bottom-0 text-white '>Features Movie
+            <h1 className='text-center text-5xl  font-bold font bottom-0  '>Features Movie
             <div className='divider  md:container mx-auto'></div>
 
             </h1>
@@ -50,7 +50,7 @@ const FeatureMovie = ({data}) => {
                <div className='my-11  '>
                 <div class="divider "> <Link to={'/all-movies'}>
                 
-                <button  className='border-2 cursor-pointer hover:opacity-70  hover:transform hover:duration-300    hover:text-black hover:bg-gray-200 px-6 py-2 text-xl text-white  '>All Movies</button>
+                <button  className='border-2 cursor-pointer hover:opacity-70  hover:transform hover:duration-300 text-black    bg-gray-200 px-6 py-2 text-xl   '>All Movies</button>
                 </Link>
                 </div>
                </div>

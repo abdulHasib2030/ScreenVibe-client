@@ -13,6 +13,23 @@ import AllMovies from "../pages/AllMovies";
 import DetailsMovie from "../pages/DetailsMovie";
 import Favorites from "../pages/Favorites";
 import Home from "../pages/Home";
+import Contact from "../pages/Contact";
+
+const loader1 = async () => {
+    const response = await fetch("http://localhost:5000/all-movies");
+    return response.json();
+  };
+  
+  const loader2 = async () => {
+    const response = await fetch('http://localhost:5000');
+    console.log(response);
+    return response.json();
+  };
+  
+  const combinedLoader = async () => {
+    const [data1, data2] = await Promise.all([loader1(), loader2()]);
+    return { data1, data2 };
+  };
 
 const Route = createBrowserRouter([
     {
@@ -23,7 +40,7 @@ const Route = createBrowserRouter([
             {
                 path: '/',
                 element:<Home></Home>,
-                loader: () => fetch('http://localhost:5000'),
+                loader: combinedLoader,
             },
             {
                 path: '/add-movie',
@@ -61,6 +78,10 @@ const Route = createBrowserRouter([
                    <Favorites></Favorites>
                 </PrivateRoute>,
                 loader: ({params}) => fetch(`http://localhost:5000/my-favorite/${params.email}`),
+            },
+            {
+                path: '/contact',
+                element: <Contact></Contact>
             }
         ]
     }
