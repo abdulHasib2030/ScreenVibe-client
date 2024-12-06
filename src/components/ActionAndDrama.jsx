@@ -48,7 +48,7 @@ const ActionAndDrama = ({data}) => {
           {data.map((item) => (
             <SwiperSlide>
               <div key={item.id} className='cursor-pointer hover:opacity-70 hover:duration-500 hover:ease-in-out ' >
- <Link to={`/movie-details/${item._id}`}>
+ <Link state={{title:`movie-details/${item._id}`}} to={`/movie-details/${item._id}`}>
                 <figure>
                   <img src={item.poster}  className="w-full object-cover" />
                 </figure>

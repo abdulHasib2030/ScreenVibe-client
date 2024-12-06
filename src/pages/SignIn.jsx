@@ -1,13 +1,17 @@
 import React, { useContext } from 'react';
 import image from '../assets/loginImg.jpg'
 import { FcGoogle } from "react-icons/fc";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { AuthContext } from '../provider/AuthProvider';
 import toast from 'react-hot-toast';
 const SignIn = () => {
    const {setUser, userLogin,  googleAuth} = useContext(AuthContext)
    const navigate = useNavigate()
+   const location = useLocation()
+  //  const {id} = useParams()
+   
 
+ console.log(location.state);
   const handleUserLogin = (e) =>{
     e.preventDefault()
     const form = e.target;
@@ -17,7 +21,14 @@ const SignIn = () => {
     .then(result =>{
       setUser(result.user)
       toast.success("Successfully login")
-      navigate('/')
+      if(location?.state.title === 'my-favorite'){
+        console.log("Abdul Haisb");
+        navigate(`/${location.state.title}/${result.user.email}`)
+      }
+      else{
+        navigate(location?.state ? `/${location.state.title}` : '/')
+
+      }
     })
     .catch(err =>{
       toast.error("Invalid credentials")
@@ -87,7 +98,7 @@ const SignIn = () => {
             </div>
           </button>
 
-      <p className="mt-8">Need an account? <Link to={'/register'} className="text-blue-500 hover:text-blue-700 font-semibold">Create an
+      <p className="mt-8">Need an account? <Link state={location.state} to={'/register'} className="text-blue-500 hover:text-blue-700 font-semibold">Create an
               account</Link></p>
 
 

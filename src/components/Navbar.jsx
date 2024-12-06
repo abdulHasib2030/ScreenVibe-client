@@ -109,7 +109,7 @@ const Navbar = () => {
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
                         </svg>
                     </li>
-                    <li><Link to={`/my-favorite/${user?.email}`} onClick={() => bgColorActive("fav")} className={`text-sm ${navActive[3] ? 'text-blue-600' : ''} hover:text-gray-500 font-bold`} href="#">My Favorites</Link></li>
+                    <li><Link to={`/my-favorite/${user?.email}`} state={{title:`my-favorite`}} onClick={() => bgColorActive("fav")} className={`text-sm ${navActive[3] ? 'text-blue-600' : ''} hover:text-gray-500 font-bold`} href="#">My Favorites</Link></li>
                     <li className="text-gray-300">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" className="w-4 h-4 current-fill" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
@@ -211,7 +211,7 @@ const Navbar = () => {
                                 <Link to={'add-movie'} onClick={() => bgColorActive("add")} className="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" href="#">Add Movie</Link>
                             </li>
                             <li className="mb-1">
-                                <Link to={`/my-favorite/${user?.email}`} onClick={() => bgColorActive("fav")} className="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" >My Favorites</Link>
+                                <Link state={{title:`my-favorite`}} to={`/my-favorite/${user?.email}`} onClick={() => bgColorActive("fav")} className="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" >My Favorites</Link>
                             </li>
                             <li className="mb-1">
                                 <Link to={'/contact'} onClick={() => bgColorActive("contact")} className="block p-4 text-sm font-semibold text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" href="#">Contact</Link>

@@ -6,7 +6,7 @@ import { AuthContext } from "../provider/AuthProvider";
 const LoginRedirect = ({ children}) => {
   const {user} = useContext(AuthContext)
   const location = useLocation()
-  console.log(location.state)
+  console.log(location.pathname)
   if (user) {
     return <Navigate to={location?.state ? `/${location.state.id}` : '/'} />;
   }

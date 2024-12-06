@@ -50,9 +50,9 @@ const Route = createBrowserRouter([
             },
             {
                 path: '/login',
-                element: <LoginRedirect>
-                    <SignIn></SignIn>
-                </LoginRedirect>
+                element: <SignIn></SignIn>,
+                // <LoginRedirect>
+                // {/* </LoginRedirect> */}
             },
             {
                 path: '/register',

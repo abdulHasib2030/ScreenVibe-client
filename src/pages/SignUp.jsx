@@ -1,13 +1,15 @@
 import React, { useContext, useState } from 'react';
 import image from '../assets/loginImg.jpg'
 import { FcGoogle } from 'react-icons/fc';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../provider/AuthProvider';
 import toast from 'react-hot-toast';
 const SignUp = () => {
-    const { setUser, createUser,updateUserProfile, googleAuth } = useContext(AuthContext)
+    const { setUser,loading, createUser,updateUserProfile, googleAuth } = useContext(AuthContext)
     const [error, setError] = useState({})
     const navigate = useNavigate()
+    const location = useLocation()
+
     const handleUserRegister = (e) => {
         e.preventDefault()
         const form = e.target
@@ -45,7 +47,12 @@ const SignUp = () => {
             updateUserProfile({displayName:name, photoURL: photoUrl})
             .then(() =>{
                 toast.success("Successfully register account.")
-                navigate('/')
+                if(location?.state.title === 'my-favorite'){
+                    console.log("Abdul Haisb");
+                    navigate(`/${location.state.title}/${result.user.email}`)
+                  }
+                  else{
+                    navigate(location?.state ? `/${location.state.title}` : '/')}
 
             })
             .catch((error) =>{
@@ -56,6 +63,7 @@ const SignUp = () => {
         })
         .catch((error) =>{
             if (error.code === "auth/email-already-in-use") {
+                // loading(false)
                 setError({user:"This email is already registered. Please log in."});
             }
             else {

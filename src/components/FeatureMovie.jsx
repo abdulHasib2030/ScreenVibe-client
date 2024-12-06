@@ -35,7 +35,7 @@ const FeatureMovie = ({data}) => {
                             ></Rating>
 
                             </div>
-                            <Link to={`/movie-details/${item._id}`} className="block px-4 py-1 my-3   text-center text-white font-semibold  bg-[#333333]  hover:opacity-70 hover:rounded-2xl hover:transform hover:duration-200 ">See Detail</Link>
+                            <Link state={{title:`movie-details/${item._id}`}} to={`/movie-details/${item._id}`} className="block px-4 py-1 my-3   text-center text-white font-semibold  bg-[#333333]  hover:opacity-70 hover:rounded-2xl hover:transform hover:duration-200 ">See Detail</Link>
 
                             
                             
