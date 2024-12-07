@@ -50,8 +50,8 @@ const AllMovies = () => {
                                 </figure>
                                 <div className=" px-2 py-2 pb-0 ">
                                     <h2 className="card-title text-2xl">{item.title}</h2>
-                                    <div className='grid grid-cols-2   '>
-                                        <p> <span className=' font-semibold text-black'>Genre:</span> {item.genre}</p>
+                                    <div className='   '>
+                                        <p className='flex gap-1'> <span className=' font-semibold text-black'>Genre:</span> {item.genres.map((gen,idx)=> <li className='list-none'>{gen}{idx === item.genres.length-1? '': ','}</li>)}</p>
                                         <p> <span className=' font-semibold text-black'> Duration:</span> {item.duration} minutes</p>
                                         <p> <span className=' font-semibold text-black'> Release Year:</span> {item.year}</p>
                                     </div>

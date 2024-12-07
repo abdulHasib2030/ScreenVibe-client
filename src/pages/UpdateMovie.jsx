@@ -10,12 +10,12 @@ import { Rating } from 'react-simple-star-rating';
 const UpdateMovie = () => {
     const navigate = useNavigate();
   const { user } = useContext(AuthContext);
-  const [selectedYear, setSelectedYear] = useState(null);
   const [rating, setRating] = useState(0);
   const loadData = useLoaderData()
-  const {_id, poster, title, genre, duration, year, summary} = loadData
-  
-  
+  const {_id, poster, title, genres, duration, year, summary} = loadData
+  const [tempgenre, setTempGenres] = useState(genres)
+  const [selectedYear, setSelectedYear] = useState(year ? new Date(year, 0) : '');
+  console.log(selectedYear);
   const {
     register,
     handleSubmit,
@@ -31,6 +31,12 @@ const UpdateMovie = () => {
       return false;
     }
   };
+if(!selectedYear){
+    setSelectedYear(year)
+}
+if (rating === 0){
+  setRating(loadData.rating)
+}
 
   const onSubmit = (data) => {
     if (!validateUrl(data.poster)) {
@@ -47,13 +53,13 @@ const UpdateMovie = () => {
           });
     }
     const editData = ({poster: data.poster, 
-        title:data.title, genre: data.genre, duration:data.duration,
-         year:selectedYear.getFullYear(), 
+        title:data.title, genre: tempgenre, duration:data.duration,
+        year: !selectedYear ? year :selectedYear.getFullYear() , 
         rating: rating, 
         summary:data.summary})
-        console.log(editData);
+       
   
-    fetch(`https://screen-vibe-rho.vercel.app/movie/update/${_id}`, {
+    fetch(`http://localhost:5000/movie/update/${_id}`, {
         method: 'PUT',
         headers: {
             'content-type': 'application/json',
@@ -68,17 +74,21 @@ const UpdateMovie = () => {
      })
 
   };
-if(!selectedYear){
-    setSelectedYear(year)
+
+
+const handleGenres = (e) =>{
+
+       setTempGenres([...tempgenre, e.target.value])
+       const genreId = document.getElementById('genre-id')
+
+       genreId.value = tempgenre
 }
-if (rating === 0){
-  setRating(loadData.rating)
-}
+
 
   return (
     <div>
       <section className="max-w-4xl p-6 mx-auto bg-indigo-600 rounded-md shadow-md dark:bg-gray-800 my-10">
-        <h1 className="text-xl font-bold text-white capitalize dark:text-white">Add Movie</h1>
+        <h1 className="text-xl font-bold text-white capitalize dark:text-white">Update Movie</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
             {/* Poster */}
@@ -114,8 +124,7 @@ if (rating === 0){
             <div>
               <label className="text-white dark:text-gray-200">Choose a Genre</label>
               <select
-                {...register("genre", { required: "Genre is required" })}
-                defaultValue={genre}
+               onChange={(e)=>handleGenres(e)}
                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
               >
                 <option value="">Select a Genre</option>
@@ -135,6 +144,22 @@ if (rating === 0){
                 <option value="biography">Biography</option>
                 <option value="sports">Sports</option>
               </select>
+              {/* {errors.genre && <p className="text-red-400">{errors.genre.message}</p>} */}
+            </div>
+            {/* selected Genre */}
+            <div>
+              <label className="text-white dark:text-gray-200">Selected Genres</label>
+              <input
+                {...register("genres", {
+                  required: "Genres is required"
+                })}
+                type="text"
+              
+              id='genre-id'
+               defaultValue={tempgenre}
+         
+                className="block  w-full py-2 px-4 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+              />
               {errors.genre && <p className="text-red-400">{errors.genre.message}</p>}
             </div>
 
@@ -161,11 +186,13 @@ if (rating === 0){
               <div className="w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
                 <DatePicker
                   className="text-gray-700 dark:bg-gray-800 dark:text-gray-300"
-                  selected={selectedYear}
+                  // selected={selectedYear}
                   onChange={(date) => setSelectedYear(date)}
                   showYearPicker
                   dateFormat="yyyy"
                   placeholderText="Select a year"
+                  selected={selectedYear}
+                 
                   
                 />
               </div>
@@ -208,7 +235,7 @@ if (rating === 0){
 
           <div className="flex justify-start mt-6">
             <button className="px-8 py-2 leading-5 text-black font-bold text-xl transition-colors duration-200 transform bg-gradient-to-r from-[#5FE1E7] to-[#D3F46D] hover:bg-pink-700 focus:outline-none focus:bg-gray-600">
-              Add Movie
+              Update Movie
             </button>
           </div>
         </form>

@@ -11,7 +11,7 @@ const DetailsMovie = () => {
     const navigate = useNavigate()
     const { user } = useContext(AuthContext)
     const loadData = useLoaderData()
-    const { _id, poster, title, genre, duration, year, rating, summary, email } = loadData;
+    const { _id, poster, title, genres, duration, year, rating, summary, email } = loadData;
     console.log();
 
     const handleMovieDelete = (id) => {
@@ -46,7 +46,7 @@ const DetailsMovie = () => {
     }
 
     const handleAddFavorite = (id) => {
-        const data = { id: _id, poster: poster, title: title, genre: genre, duration: duration, year: year, rating: rating, summary: summary, email: user.email }
+        const data = { id: _id, poster: poster, title: title, genres: genres, duration: duration, year: year, rating: rating, summary: summary, email: user.email }
 
         fetch(`https://screen-vibe-rho.vercel.app/favorite/${id}/${user.email}`)
             .then(res => res.json())
@@ -103,7 +103,8 @@ const DetailsMovie = () => {
 
                         <div className="ml-4 space-y-6 mt-3 md:mt-0 lg:w-1/2">
                             <h1 className="text-2xl font-bold text-white">Movie title: <span className='text-xl text-gray-400'>{title}</span></h1>
-                            <h1 className="text-2xl font-bold text-white">Gengre: <span className='text-xl text-gray-400'>{genre}</span></h1>
+                            <h1 className=' flex items-center gap-2 text-2xl font-bold text-white'>Genre: <span className=' text-xl text-gray-400 flex'> {genres.map((gen,idx)=> <li className='list-none'>{gen}{idx === genres.length-1? '': ','}</li>)}</span></h1>
+
                             <h1 className="text-2xl font-bold text-white">Movie duration: <span className='text-xl text-gray-400'>{duration}</span></h1>
                             <h1 className="text-2xl font-bold text-white">Movie Release Year : <span className='text-xl text-gray-400'>{year}</span></h1>
                             <h1 className="text-2xl flex items-center font-bold text-white">Movie rating: <span className='text-xl text-gray-400 '>

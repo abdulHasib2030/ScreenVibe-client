@@ -17,12 +17,12 @@ import Contact from "../pages/Contact";
 import UpdateMovie from "../pages/UpdateMovie";
 
 const loader1 = async () => {
-    const response = await fetch("https://screen-vibe-rho.vercel.app/all-movies");
+    const response = await fetch("http://localhost:5000/all-movies");
     return response.json();
 };
 
 const loader2 = async () => {
-    const response = await fetch('https://screen-vibe-rho.vercel.app');
+    const response = await fetch('http://localhost:5000');
     console.log(response);
     return response.json();
 };
