@@ -53,7 +53,7 @@ const UpdateMovie = () => {
         summary:data.summary})
         console.log(editData);
   
-    fetch(`http://localhost:5000/movie/update/${_id}`, {
+    fetch(`https://screen-vibe-rho.vercel.app/movie/update/${_id}`, {
         method: 'PUT',
         headers: {
             'content-type': 'application/json',

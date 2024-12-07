@@ -10,7 +10,7 @@ const AllMovies = () => {
 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/all-movies?searchParams=${search}`)
+        fetch(`https://screen-vibe-rho.vercel.app/all-movies?searchParams=${search}`)
             .then((res) => res.json())
             .then((searchData) => {
                 setData(searchData.result); 

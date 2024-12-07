@@ -25,13 +25,13 @@ const DetailsMovie = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/movie-delete/${id}`, {
+                fetch(`https://screen-vibe-rho.vercel.app/movie-delete/${id}`, {
                     method: 'DELETE',
                 })
                     .then(res => res.json())
                     .then(data => {
-                        console.log(data);
-                        if (data.deletedCount > 0) {
+                        console.log(data.result, data.favDel);
+                        if (data.result.deletedCount > 0) {
                             Swal.fire({
                                 title: "Deleted!",
                                 text: "Movie has been deleted.",
@@ -48,14 +48,14 @@ const DetailsMovie = () => {
     const handleAddFavorite = (id) => {
         const data = { id: _id, poster: poster, title: title, genre: genre, duration: duration, year: year, rating: rating, summary: summary, email: user.email }
 
-        fetch(`http://localhost:5000/favorite/${id}/${user.email}`)
+        fetch(`https://screen-vibe-rho.vercel.app/favorite/${id}/${user.email}`)
             .then(res => res.json())
             .then(temp => {
                 if (temp?.id && user.email) {
                     return toast.error("Already added this movie favorite")
                 }
                 else {
-                    fetch(`http://localhost:5000/favorite`, {
+                    fetch(`https://screen-vibe-rho.vercel.app/favorite`, {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json',
@@ -77,9 +77,7 @@ const DetailsMovie = () => {
 
     }
 
-    const handleUpdate = (id) =>{
-
-    }
+   
     return (
         <div>
             <div className="">

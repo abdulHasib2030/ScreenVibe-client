@@ -11,21 +11,27 @@ import { useNavigate } from 'react-router-dom';
 
 const AddMovie = () => {
     const navigate = useNavigate()
-    const {user} = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
     const [selectedYear, setSelectedYear] = useState(null);
     const [rating, setRating] = useState(0);
     const [error, setError] = useState({})
+    const [genres, setGenres] = useState([]);
 
+    // Handle changes in the multiple select element
+    const handleGenreChange = (e) => {
+        const selectedValues = Array.from(e.target.selectedOptions, (option) => option.value);
+        setGenres(selectedValues);
+    };
 
     const validateUrl = (url) => {
         try {
-          new URL(url); 
-          return true;
+            new URL(url);
+            return true;
         } catch (error) {
-          return false;
+            return false;
         }
-      };
-    const handleMovieAdd = (e) =>{
+    };
+    const handleMovieAdd = (e) => {
         e.preventDefault();
         const form = e.target;
         const poster = (form.poster.value);
@@ -33,46 +39,52 @@ const AddMovie = () => {
         const genre = form.genre.value;
         const duration = form.duration.value;
         const summary = form.summary.value;
-       if(!validateUrl(poster)){
-        return setError({poster: "Provide a valid url link."})
-       }
-       if(!title || title.length < 2){
-        return setError({title: "The title must be at least 2 characters long."})
-       }
-       if(!duration || duration < 60){
-        return setError({duration:"Duration must be greater than 60 minutes"})
-       }
-       if(!selectedYear){
-        return setError({year:"The Release Year field cannot be empty. Please select a valid year."})
-       }
-       if(!rating){
-        return setError({rating: "You must choose a rating to proceed."})
-       }
-       if(!summary || summary.length < 10){
-        return setError({summary: "The summary field requires a non-empty value with at least 10 characters to proceed."})
-       }
-       else{
-        setError({poster:null})
-       }
-       const year = selectedYear.getFullYear()
+
+        if (!validateUrl(poster)) {
+            return setError({ poster: "Provide a valid url link." })
+        }
+        if (!title || title.length < 2) {
+            return setError({ title: "The title must be at least 2 characters long." })
+        }
+        if(!genre){
+            return setError({genre:"You must select a genre to proceed." })
+        }
+        if (!duration || duration < 60) {
+            return setError({ duration: "Duration must be greater than 60 minutes" })
+        }
+        if (!selectedYear) {
+            return setError({ year: "The Release Year field cannot be empty. Please select a valid year." })
+        }
+        if (!rating) {
+            return setError({ rating: "You must choose a rating to proceed." })
+        }
+        if (!summary || summary.length < 10) {
+            return setError({ summary: "The summary field requires a non-empty value with at least 10 characters to proceed." })
+        }
+        
+        else {
+            setError({ poster: null })
+        }
+        const year = selectedYear.getFullYear()
         // console.log(user.email);
         const email = user.email
-       const newMovie = {poster, title, genre, duration, year, rating,summary, email }
-       fetch('http://localhost:5000/add-movie', {
-        method:'POST',
-        headers:{
-            'content-type':'application/json',
-        },
-        body: JSON.stringify(newMovie)
-       })
-       .then(res => res.json())
-       .then(data => {
-        console.log(data);
-        if(data.acknowledged && data.insertedId ){
-            toast.success("Succssfully Added Movie")
-            navigate('/all-movies')
-        }
-       })
+        const newMovie = { poster, title, genres, duration, year, rating, summary, email }
+
+        fetch('https://screen-vibe-rho.vercel.app/add-movie', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify(newMovie)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.acknowledged && data.insertedId) {
+                    toast.success("Succssfully Added Movie")
+                    navigate('/all-movies')
+                }
+            })
 
     }
     // console.log(rating, selectedYear);
@@ -87,25 +99,31 @@ const AddMovie = () => {
                         <div>
                             <label className="text-white dark:text-gray-200" >Movie Poster Url</label>
                             <input id="poster-url" name='poster' type="text" placeholder='e.g https://example.jpg' className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring" />
-                         {
-                            error && error?.poster && <p className='text-red-400'>
-                                 {error.poster}
-                                 </p>
-                         }
+                            {
+                                error && error?.poster && <p className='text-red-400'>
+                                    {error.poster}
+                                </p>
+                            }
                         </div>
 
                         <div>
                             <label className="text-white dark:text-gray-200" >Movie Title</label>
                             <input id="movie-title" type="text" name='title' placeholder='Enter movie title' className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring" />
                             {
-                            error && error?.title && <p className='text-red-400'>
-                                 {error.title}
-                                 </p>
-                         }
+                                error && error?.title && <p className='text-red-400'>
+                                    {error.title}
+                                </p>
+                            }
                         </div>
                         <div>
-                            <label className="text-white dark:text-gray-200" >Choose a Genre</label>
-                            <select name='genre' className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
+                            <label className="text-white dark:text-gray-200">Choose Genres</label>
+                            <select
+                                name="genre" 
+                                onChange={(e) => setGenres([...genres, e.target.value])}
+                                className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                            >
+ 
+                                <option value="">Select a genre</option>
                                 <option value="comedy">Comedy</option>
                                 <option value="drama">Drama</option>
                                 <option value="horror">Horror</option>
@@ -122,53 +140,68 @@ const AddMovie = () => {
                                 <option value="biography">Biography</option>
                                 <option value="sports">Sports</option>
                             </select>
+                            {
+                                error && error?.genre && <p className='text-red-400'>
+                                    {error.genre}
+                                </p>
+                            }
+                        </div>
+
+                        <div>
+                            <label className="text-white dark:text-gray-200">Selected Genres</label>
+                            <input
+                                type="text"
+                                value={genres} 
+                                disabled
+                                className="input block w-full py-2 px-4 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                            />
                         </div>
                         <div>
                             <label className="text-white dark:text-gray-200" >Duration(must be greater than 60 minutes)</label>
 
                             <input id="duration" type="number" name="duration" min="60" placeholder="Enter duration (e.g 120)" className="block w-full py-2 px-4 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring" />
                             {
-                            error && error?.duration && <p className='text-red-400'>
-                                 {error.duration}
-                                 </p>
-                         }
+                                error && error?.duration && <p className='text-red-400'>
+                                    {error.duration}
+                                </p>
+                            }
                         </div>
                         <div>
                             <label className="text-white dark:text-gray-200" for="passwordConfirmation">Release Year</label> <br />
                             <div className=" w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
-                            <DatePicker  className='text-gray-700 dark:bg-gray-800 dark:text-gray-300'
-                                selected={selectedYear}
-                                onChange={(date) => setSelectedYear(date)}
-                                showYearPicker
-                                dateFormat="yyyy"
-                                placeholderText="Select a year"
-                                name='dateData'
-                                 />
+                                <DatePicker className='text-gray-700 dark:bg-gray-800 dark:text-gray-300'
+                                    selected={selectedYear}
+                                    onChange={(date) => setSelectedYear(date)}
+                                    showYearPicker
+                                    dateFormat="yyyy"
+                                    placeholderText="Select a year"
+                                    name='dateData'
+                                />
 
                             </div>
                             {
-                            error && error?.year && <p className='text-red-400'>
-                                 {error.year}
-                                 </p>
-                         }
+                                error && error?.year && <p className='text-red-400'>
+                                    {error.year}
+                                </p>
+                            }
                         </div>
 
 
                         <div>
                             <label className="text-white dark:text-gray-200" > Give Your Rating</label>
                             <div className="rating-container">
-                                <Rating  onClick={(rate) => setRating(rate)}
-                                  ratingValue={rating}
+                                <Rating onClick={(rate) => setRating(rate)}
+                                    ratingValue={rating}
                                     showTooltip
                                     tooltipArray={['Terrible', 'Bad', 'Average', 'Great', 'Prefect']}
                                 ></Rating>
 
                             </div>
                             {
-                            error && error?.rating && <p className='text-red-400'>
-                                 {error.rating}
-                                 </p>
-                         }
+                                error && error?.rating && <p className='text-red-400'>
+                                    {error.rating}
+                                </p>
+                            }
                         </div>
 
 
@@ -177,10 +210,10 @@ const AddMovie = () => {
                             <label className="text-white dark:text-gray-200" for="passwordConfirmation">Add Summary</label>
                             <textarea name='summary' id="textarea" type="textarea" rows={'6'} className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"></textarea>
                             {
-                            error && error?.summary && <p className='text-red-400'>
-                                 {error.summary}
-                                 </p>
-                         }
+                                error && error?.summary && <p className='text-red-400'>
+                                    {error.summary}
+                                </p>
+                            }
                         </div>
 
                     </div>

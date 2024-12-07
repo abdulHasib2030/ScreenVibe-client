@@ -17,12 +17,12 @@ import Contact from "../pages/Contact";
 import UpdateMovie from "../pages/UpdateMovie";
 
 const loader1 = async () => {
-    const response = await fetch("http://localhost:5000/all-movies");
+    const response = await fetch("https://screen-vibe-rho.vercel.app/all-movies");
     return response.json();
 };
 
 const loader2 = async () => {
-    const response = await fetch('http://localhost:5000');
+    const response = await fetch('https://screen-vibe-rho.vercel.app');
     console.log(response);
     return response.json();
 };
@@ -64,21 +64,21 @@ const Route = createBrowserRouter([
             {
                 path: '/all-movies',
                 element: <AllMovies></AllMovies>,
-                loader: () => fetch('http://localhost:5000/all-movies'),
+                loader: () => fetch('https://screen-vibe-rho.vercel.app/all-movies'),
             },
             {
                 path: '/movie-details/:id',
                 element: <PrivateRoute>
                     <DetailsMovie></DetailsMovie>
                 </PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/movie-details/${params.id}`),
+                loader: ({ params }) => fetch(`https://screen-vibe-rho.vercel.app/movie-details/${params.id}`),
             },
             {
                 path: '/my-favorite/:email',
                 element: <PrivateRoute>
                     <Favorites></Favorites>
                 </PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/my-favorite/${params.email}`),
+                loader: ({ params }) => fetch(`https://screen-vibe-rho.vercel.app/my-favorite/${params.email}`),
             },
             {
                 path: '/contact',
@@ -89,7 +89,7 @@ const Route = createBrowserRouter([
                 element: <PrivateRoute>
                     <UpdateMovie></UpdateMovie>
                 </PrivateRoute> ,
-                loader: ({params}) => fetch(`http://localhost:5000/movie-details/${params.id}`),
+                loader: ({params}) => fetch(`https://screen-vibe-rho.vercel.app/movie-details/${params.id}`),
 
             }
         ]

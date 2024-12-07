@@ -66,7 +66,7 @@ const Favorites = () => {
                             ></Rating>
 
                             </div>
-                            <Link to={`/movie-details/${item._id}`} className="block px-4 py-1 my-3   text-center text-white font-semibold  bg-[#333333]  hover:opacity-70 hover:rounded-2xl hover:transform hover:duration-200 ">See Detail</Link>
+                            <Link to={`/movie-details/${item.id}`} className="block px-4 py-1 my-3   text-center text-white font-semibold  bg-[#333333]  hover:opacity-70 hover:rounded-2xl hover:transform hover:duration-200 ">See Detail</Link>
                             <button onClick={()=>handleDeleteFavorite(item._id)}  className="block px-4 py-1 my-3   text-center text-white font-semibold  bg-red-500  hover:opacity-70 hover:rounded-2xl hover:transform hover:duration-200 flex gap-3">Delete Favorite <MdDeleteOutline className='text-2xl' /></button>
 
                             
