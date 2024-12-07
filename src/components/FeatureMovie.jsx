@@ -3,6 +3,10 @@ import { Link } from 'react-router-dom';
 import { Rating } from 'react-simple-star-rating';
 
 const FeatureMovie = ({data}) => {
+    const sortData = data.sort((a, b)=> b.rating - a.rating)
+    sortData.map(item =>{
+        console.log(item.rating);
+    })
     return (
         <div className='relative md:-top-24 mt-6 md:mt-0'>
             <h1 className='text-center text-5xl  font-bold font bottom-0  '>Features Movie
@@ -14,7 +18,7 @@ const FeatureMovie = ({data}) => {
                
             <div className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-14 items-center'>
                 {
-                    data.map(item =>   
+                    data.sort((a, b)=> b.rating - a.rating).map(item =>   
                     <div className="card card-compact text-black   bg-gradient-to-r  to-[#5FE1E7] from-[#D3F46D] rounded-none  duration-300 ease-in-out transition-transform transform hover:-translate-y-2 ">
                         <figure>
                             <img className='h-96 w-full mx-auto hover:opacity-70 transition-opacity'

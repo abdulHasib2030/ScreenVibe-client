@@ -21,7 +21,7 @@ const SignIn = () => {
     .then(result =>{
       setUser(result.user)
       toast.success("Successfully login")
-      if(location?.state.title === 'my-favorite'){
+      if(location?.state?.title === 'my-favorite'){
         console.log("Abdul Haisb");
         navigate(`/${location.state.title}/${result.user.email}`)
       }

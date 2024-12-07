@@ -17,6 +17,7 @@ const Home = () => {
             <ActionAndDrama data={data1.actionDrama}></ActionAndDrama>
           
            <NewestMovie data={comedy}></NewestMovie>
+           {/* <Temp></Temp> */}
         </div>
     );
 };

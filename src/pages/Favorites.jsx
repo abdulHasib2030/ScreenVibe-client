@@ -42,9 +42,10 @@ const Favorites = () => {
             <div className=' md:container mx-auto w-[90%]'>
                 <h1 className='text-4xl font-bold'>Favorites Movies</h1>
                 <div className='divider'></div>
-            <div className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4 items-center'>
                 {
-                    loadData.map(item =>   
+                    loadData.length > 0 ?
+                    <div className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-14 items-center'>
+                    {loadData.map(item =>   
                     <div className="card card-compact text-black   bg-gradient-to-r  to-[#5FE1E7] from-[#D3F46D] rounded-none  duration-300 ease-in-out transition-transform transform hover:-translate-y-2 ">
                         <figure>
                             <img className='h-96 w-full mx-auto hover:opacity-70 transition-opacity'
@@ -71,12 +72,16 @@ const Favorites = () => {
                             
                             
                         </div>
-                    </div>)
+                    </div>)}
+                        </div>
+                    :
+                    <div>
+                        <h1 className='text-center  text-4xl'>No Movies Found in Your Favorites List.</h1>
+                    </div>
                 }
             
               
 
-                </div>
             </div>
         </div>
     );

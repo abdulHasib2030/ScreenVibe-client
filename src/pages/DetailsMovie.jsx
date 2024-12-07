@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
-import { useLoaderData, useNavigate } from 'react-router-dom';
+import { Link, useLoaderData, useNavigate } from 'react-router-dom';
 import { Rating } from 'react-simple-star-rating';
-import { MdDeleteOutline } from "react-icons/md";
+import { MdDeleteOutline, MdEdit } from "react-icons/md";
 import { FaRegHeart } from "react-icons/fa";
 import Swal from 'sweetalert2'
 import toast from 'react-hot-toast';
@@ -77,6 +77,9 @@ const DetailsMovie = () => {
 
     }
 
+    const handleUpdate = (id) =>{
+
+    }
     return (
         <div>
             <div className="">
@@ -110,9 +113,12 @@ const DetailsMovie = () => {
                                     <Rating initialValue={rating} readonly showTooltip tooltipArray={['Terrible', 'Bad', 'Average', 'Great', 'Prefect']}></Rating>
                                 </div>
                             </span></h1>
-                            <div className='flex gap-3'>
+                            <div className='flex gap-3 flex-wrap'>
                                 <button onClick={() => handleMovieDelete(_id)} className='flex items-center text-2xl bg-gradient-to-r gap-3 to-[#5FE1E7] from-[#D3F46D] text-black px-6 py-2 hover:rounded-2xl hover:transform hover:duration-200'>Delete Movie <MdDeleteOutline className='text-4xl' /></button>
                                 <button onClick={() => handleAddFavorite(_id)} className='flex items-center text-2xl bg-gradient-to-r gap-3 to-[#5FE1E7] from-[#D3F46D] text-black px-6 py-2 hover:rounded-2xl hover:transform hover:duration-200'>Add to Favorite <FaRegHeart className='text-4xl' /></button>
+                             <Link to={`/movie/update/${_id}`}>
+                             <button   className='flex items-center text-2xl bg-gradient-to-r gap-3 to-[#5FE1E7] from-[#D3F46D] text-black px-6 py-2 hover:rounded-2xl hover:transform hover:duration-200'>Update Movie <MdEdit className='text-4xl' /></button>
+                             </Link>   
 
                             </div>
 
@@ -122,6 +128,8 @@ const DetailsMovie = () => {
                     </div>
                     <h1 className="text-2xl mt-4 font-bold text-white">Movie Summary: <span className='text-lg text-gray-400'>{summary}</span></h1>
                 </div>
+
+                <div className='divider relative top-[-120px] '> <Link to={'/all-movies'}><span className='bg-gradient-to-r text-xl font-bold to-[#5FE1E7] from-[#D3F46D] text-black px-6 py-2 hover:rounded-2xl hover:transform hover:duration-200'>See all movies</span></Link> </div>
 
             </div>
         </div>

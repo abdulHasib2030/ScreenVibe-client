@@ -14,22 +14,23 @@ import DetailsMovie from "../pages/DetailsMovie";
 import Favorites from "../pages/Favorites";
 import Home from "../pages/Home";
 import Contact from "../pages/Contact";
+import UpdateMovie from "../pages/UpdateMovie";
 
 const loader1 = async () => {
     const response = await fetch("http://localhost:5000/all-movies");
     return response.json();
-  };
-  
-  const loader2 = async () => {
+};
+
+const loader2 = async () => {
     const response = await fetch('http://localhost:5000');
     console.log(response);
     return response.json();
-  };
-  
-  const combinedLoader = async () => {
+};
+
+const combinedLoader = async () => {
     const [data1, data2] = await Promise.all([loader1(), loader2()]);
     return { data1, data2 };
-  };
+};
 
 const Route = createBrowserRouter([
     {
@@ -39,7 +40,7 @@ const Route = createBrowserRouter([
         children: [
             {
                 path: '/',
-                element:<Home></Home>,
+                element: <Home></Home>,
                 loader: combinedLoader,
             },
             {
@@ -75,13 +76,21 @@ const Route = createBrowserRouter([
             {
                 path: '/my-favorite/:email',
                 element: <PrivateRoute>
-                   <Favorites></Favorites>
+                    <Favorites></Favorites>
                 </PrivateRoute>,
-                loader: ({params}) => fetch(`http://localhost:5000/my-favorite/${params.email}`),
+                loader: ({ params }) => fetch(`http://localhost:5000/my-favorite/${params.email}`),
             },
             {
                 path: '/contact',
                 element: <Contact></Contact>
+            },
+            {
+                path: '/movie/update/:id',
+                element: <PrivateRoute>
+                    <UpdateMovie></UpdateMovie>
+                </PrivateRoute> ,
+                loader: ({params}) => fetch(`http://localhost:5000/movie-details/${params.id}`),
+
             }
         ]
     }
