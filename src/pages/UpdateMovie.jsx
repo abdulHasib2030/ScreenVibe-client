@@ -53,7 +53,7 @@ if (rating === 0){
           });
     }
     const editData = ({poster: data.poster, 
-        title:data.title, genre: tempgenre, duration:data.duration,
+        title:data.title, genres: tempgenre, duration:data.duration,
         year: !selectedYear ? year :selectedYear.getFullYear() , 
         rating: rating, 
         summary:data.summary})
