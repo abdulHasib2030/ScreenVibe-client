@@ -51,8 +51,7 @@ const Route = createBrowserRouter([
             },
             {
                 path: '/login',
-                element: 
-                <LoginRedirect>
+                element:    <LoginRedirect>
                 <SignIn></SignIn>
                  </LoginRedirect>,
             },
@@ -60,7 +59,7 @@ const Route = createBrowserRouter([
                 path: '/register',
                 element: <LoginRedirect>
                     <SignUp></SignUp>
-                </LoginRedirect>
+                </LoginRedirect>,
             },
             {
                 path: '/all-movies',

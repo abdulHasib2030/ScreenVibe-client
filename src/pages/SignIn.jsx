@@ -4,6 +4,7 @@ import { FcGoogle } from "react-icons/fc";
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { AuthContext } from '../provider/AuthProvider';
 import toast from 'react-hot-toast';
+import { Helmet } from 'react-helmet-async';
 const SignIn = () => {
    const {setUser, userLogin,  googleAuth} = useContext(AuthContext)
    const navigate = useNavigate()
@@ -55,7 +56,9 @@ const SignIn = () => {
     return (
         <div>
         
-
+        <Helmet>
+        <title>Login</title>
+      </Helmet>
 <section className="flex flex-col md:flex-row min-h-screen items-center">
 
   <div className="bg-indigo-600 hidden lg:block w-full md:w-1/2 xl:w-2/3 h-screen">

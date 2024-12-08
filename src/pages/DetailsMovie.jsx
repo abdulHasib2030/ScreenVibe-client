@@ -6,13 +6,14 @@ import { FaRegHeart } from "react-icons/fa";
 import Swal from 'sweetalert2'
 import toast from 'react-hot-toast';
 import { AuthContext } from '../provider/AuthProvider';
+import { Helmet } from 'react-helmet-async';
 
 const DetailsMovie = () => {
     const navigate = useNavigate()
     const { user } = useContext(AuthContext)
     const loadData = useLoaderData()
     const { _id, poster, title, genres, duration, year, rating, summary, email } = loadData;
- 
+
 
     const handleMovieDelete = (id) => {
         Swal.fire({
@@ -30,7 +31,7 @@ const DetailsMovie = () => {
                 })
                     .then(res => res.json())
                     .then(data => {
-                        
+
                         if (data.result.deletedCount > 0) {
                             Swal.fire({
                                 title: "Deleted!",
@@ -64,12 +65,12 @@ const DetailsMovie = () => {
                     })
                         .then(res => res.json())
                         .then(data => {
-                           if(data.acknowledged){
-                            toast.success("Successfully added favorite list.")
-                           }
+                            if (data.acknowledged) {
+                                toast.success("Successfully added favorite list.")
+                            }
                         })
                         .catch(err => {
-                       
+
                         })
                 }
             })
@@ -77,9 +78,12 @@ const DetailsMovie = () => {
 
     }
 
-   
+
     return (
         <div>
+            <Helmet>
+                <title>{title}</title>
+            </Helmet>
             <div className="">
 
                 <div className="bg-gradient-to-r to-[#5FE1E7] from-[#D3F46D] text-center space-y-4 p-12 text-black pb-56">
@@ -103,9 +107,9 @@ const DetailsMovie = () => {
 
                         <div className="ml-4 space-y-6 mt-3 md:mt-0 lg:w-1/2">
                             <h1 className="text-xl font-bold text-white">Movie title: <span className='text-lg text-gray-400'>{title}</span></h1>
-                            <h1 className=' flex items-center gap-2 text-xl  font-bold text-white'>Genre: <span className='text-lg  text-gray-400 flex flex-wrap'> {genres.map((gen,idx)=> <li className='list-none'>{gen}{idx === genres.length-1? '': ','}</li>)}</span></h1>
+                            <h1 className=' flex items-center gap-2 text-xl  font-bold text-white'>Genre: <span className='text-lg  text-gray-400 flex flex-wrap'> {genres.map((gen, idx) => <li className='list-none'>{gen}{idx === genres.length - 1 ? '' : ','}</li>)}</span></h1>
 
-                            <h1 className="text-xl font-bold text-white">Movie duration: <span className='text-lg text-gray-400'>{duration}</span></h1>
+                            <h1 className="text-xl font-bold text-white">Movie duration: <span className='text-lg text-gray-400'>{duration} minutes</span></h1>
                             <h1 className="text-xl font-bold text-white">Movie Release Year : <span className='text-lg text-gray-400'>{year}</span></h1>
                             <h1 className="text-xl flex items-center font-bold text-white">Movie rating: <span className='text-lg text-gray-400 '>
                                 <div className='rating-container'>
@@ -115,9 +119,9 @@ const DetailsMovie = () => {
                             <div className='flex gap-3 flex-wrap'>
                                 <button onClick={() => handleMovieDelete(_id)} className='flex items-center text-xl bg-gradient-to-r gap-3 to-[#5FE1E7] from-[#D3F46D] text-black px-6 py-2 hover:rounded-xl hover:transform hover:duration-200'>Delete Movie <MdDeleteOutline className='text-2xl' /></button>
                                 <button onClick={() => handleAddFavorite(_id)} className='flex items-center text-xl bg-gradient-to-r gap-3 to-[#5FE1E7] from-[#D3F46D] text-black px-6 py-2 hover:rounded-xl hover:transform hover:duration-200'>Add to Favorite <FaRegHeart className='text-2xl' /></button>
-                             <Link to={`/movie/update/${_id}`}>
-                             <button   className='flex items-center text-xl bg-gradient-to-r gap-3 to-[#5FE1E7] from-[#D3F46D] text-black px-6 py-2 hover:rounded-xl hover:transform hover:duration-200'>Update Movie <MdEdit className='text-2xl' /></button>
-                             </Link>   
+                                <Link to={`/movie/update/${_id}`}>
+                                    <button className='flex items-center text-xl bg-gradient-to-r gap-3 to-[#5FE1E7] from-[#D3F46D] text-black px-6 py-2 hover:rounded-xl hover:transform hover:duration-200'>Update Movie <MdEdit className='text-2xl' /></button>
+                                </Link>
 
                             </div>
 

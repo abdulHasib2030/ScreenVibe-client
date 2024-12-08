@@ -5,6 +5,7 @@ import { useLoaderData } from 'react-router-dom';
 import ActionAndDrama from '../components/ActionAndDrama';
 import FunnestMovie from '../components/FunnestMovie';
 import TopRating from '../components/TopRating';
+import { Helmet } from 'react-helmet-async';
 
 
 const Home = () => {
@@ -18,6 +19,9 @@ const Home = () => {
    
     return (
         <div>
+             <Helmet>
+        <title>ScreenVibe | Home</title>
+      </Helmet>
             <Banner></Banner>
            
             <FeatureMovie data={data2}></FeatureMovie>

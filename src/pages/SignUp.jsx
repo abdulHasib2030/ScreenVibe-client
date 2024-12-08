@@ -4,6 +4,7 @@ import { FcGoogle } from 'react-icons/fc';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../provider/AuthProvider';
 import toast from 'react-hot-toast';
+import { Helmet } from 'react-helmet-async';
 const SignUp = () => {
     const { setUser,loading, createUser,updateUserProfile, googleAuth } = useContext(AuthContext)
     const [error, setError] = useState({})
@@ -91,7 +92,9 @@ const SignUp = () => {
     }
     return (
         <div>
-
+ <Helmet>
+        <title>Register</title>
+      </Helmet>
 
             <div className="min-w-screen min-h-screen bg-gray-900  ">
                 <div className="bg-gray-100 text-gray-500  w-full overflow-hidden" >

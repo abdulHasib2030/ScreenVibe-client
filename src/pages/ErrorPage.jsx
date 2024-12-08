@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { TbError404 } from "react-icons/tb";
+import { Helmet } from "react-helmet-async";
 
 const ErrorPage = () => {
     const navigate = useNavigate();
@@ -10,6 +11,9 @@ const ErrorPage = () => {
 
     return (
         <div className="flex  flex-col items-center justify-center min-h-screen text-gray-800">
+             <Helmet>
+        <title>Error</title>
+      </Helmet>
             <TbError404 className="text-9xl text-red-500"/>
             <h1 className="text-5xl font-bold text-pink-600 mb-4">Oops! Page Not Found</h1>
             

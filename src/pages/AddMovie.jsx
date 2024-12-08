@@ -7,7 +7,7 @@ import toast from 'react-hot-toast';
 import { Rating } from 'react-simple-star-rating'
 import { AuthContext } from '../provider/AuthProvider';
 import { useNavigate } from 'react-router-dom';
-
+import { Helmet } from "react-helmet-async";
 
 const AddMovie = () => {
     const navigate = useNavigate()
@@ -66,7 +66,7 @@ const AddMovie = () => {
             setError({ poster: null })
         }
         const year = selectedYear.getFullYear()
-        // console.log(user.email);
+      
         const email = user.email
         const newMovie = { poster, title, genres, duration, year, rating, summary, email }
 
@@ -79,7 +79,7 @@ const AddMovie = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+               
                 if (data.acknowledged && data.insertedId) {
                     toast.success("Succssfully Added Movie")
                     navigate('/all-movies')
@@ -87,10 +87,13 @@ const AddMovie = () => {
             })
 
     }
-    // console.log(rating, selectedYear);
+ 
 
     return (
         <div>
+             <Helmet>
+        <title>Add Movie</title>
+      </Helmet>
 
             <section className="max-w-4xl p-6 mx-auto bg-indigo-600 rounded-md shadow-md dark:bg-gray-800 my-10">
                 <h1 className="text-xl font-bold text-white capitalize dark:text-white">Add Movie </h1>

@@ -44,7 +44,7 @@ This project use npm package
   npm install react-hot-toast
   npm install swiper
   npm install firebase
-  npm install aos
+  npm install react-helmet-async
   npm install react-datepicker
   npm install react-hook-form
   npm install react-icons
@@ -52,3 +52,13 @@ This project use npm package
   npm install sweetalert2
 ```
     
+# Technologies used
+
+- React
+- React router dom
+- Tailwind CSS
+- Express JS
+- MongoDB
+
+
+

@@ -7,6 +7,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { AuthContext } from '../provider/AuthProvider';
 import toast from 'react-hot-toast';
 import { Rating } from 'react-simple-star-rating';
+import { Helmet } from 'react-helmet-async';
 const UpdateMovie = () => {
     const navigate = useNavigate();
   const { user } = useContext(AuthContext);
@@ -86,6 +87,9 @@ const handleRemoveGenre = (gen) =>{
 
   return (
     <div>
+       <Helmet>
+        <title>Update Movie {title}</title>
+      </Helmet>
       <section className="max-w-4xl p-6 mx-auto bg-indigo-600 rounded-md shadow-md dark:bg-gray-800 my-10">
         <h1 className="text-xl font-bold text-white capitalize dark:text-white">Update Movie</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
