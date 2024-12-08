@@ -20,7 +20,7 @@ const ActionAndDrama = ({data}) => {
   console.log(data.length);
   return (
     <>
-      <section className="mb-10 relative md:-top-8 mt-6 md:mt-0 shadow-xl pb-4">
+      <section className="mb-10 relative md:-top-8 mt-6 md:mt-0 shadow-xl pb-4" id='actionDrama-id'>
         <div className='md:container mx-auto my-10 w-[90%]'>
 
         

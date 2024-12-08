@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -9,10 +9,12 @@ import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../provider/AuthProvider';
 
 
 const Banner = () => {
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
+    const {user} = useContext(AuthContext)
 
     return (
         <div >
@@ -32,51 +34,39 @@ const Banner = () => {
             >
                 <SwiperSlide>
                     <div className='absolute top-[30%] md:top-[20%] md:left-[35%] left-[20%] space-y-4'>
-                        <h1 className='text-5xl text-white font-bold'>American Made</h1>
-                        <ul className='flex text-[14px] text-white'>
-                            <li>2017</li> <div className='divider divider-horizontal  divider-primary'></div>
-                            <li>Comedy</li> <div className='divider divider-horizontal  divider-primary'></div>
-                            <li>1hr 55 mins</li>
-                            </ul>
+                        <h1 className='text-5xl text-white font-bold'>View Top Rated Movie</h1>
+                       
                             <button>
 
-                            <Link  className=" px-6 py-3  mb-2 leading-loose  text-center text-black font-semibold bg-gradient-to-r  from-[#5FE1E7] to-[#D3F46D] uppercase  hover:opacity-70 hover:rounded-2xl hover:transform hover:duration-200 " href="#">Movie Details</Link>
+                            <a  className=" px-6 py-3  mb-2 leading-loose  text-center text-black font-semibold bg-gradient-to-r  from-[#5FE1E7] to-[#D3F46D] uppercase  hover:opacity-70 hover:rounded-2xl hover:transform hover:duration-200 " href="#top-rated">Explore Now</a>
                           </button>
 
                     </div>
-                    <img src="https://vodi.madrasthemes.com/main/wp-content/uploads/sites/2/2019/04/slider-8-1.jpg" />
+                    <img src="https://i.ibb.co.com/Fk1Rhcj/1.jpg" />
                 </SwiperSlide>
                 <SwiperSlide>
                 <div className='absolute top-[30%] md:top-[20%] md:left-[35%] left-[20%] space-y-4'>
-                        <h1 className='text-5xl text-white font-bold'>The Convenient Groom</h1>
-                        <ul className='flex text-[14px] text-white'>
-                            <li>2016</li> <div className='divider divider-horizontal  divider-primary'></div>
-                            <li>Action, Adventure, Romance</li> <div className='divider divider-horizontal  divider-primary'></div>
-                            <li>1hr 24 mins</li>
-                            </ul>
+                        <h1 className='text-5xl text-white font-bold'>View Your Favorites Movie</h1>
+                        
                           <button>
 
-                            <Link  className=" px-6 py-3  mb-2 leading-loose  text-center text-black font-semibold bg-gradient-to-r  from-[#5FE1E7] to-[#D3F46D] uppercase  hover:opacity-70 hover:rounded-2xl hover:transform hover:duration-200 " href="#">Movie Details</Link>
+                            <Link to={`/my-favorite/${user?.email}`} className=" px-6 py-3  mb-2 leading-loose  text-center text-black font-semibold bg-gradient-to-r  from-[#5FE1E7] to-[#D3F46D] uppercase  hover:opacity-70 hover:rounded-2xl hover:transform hover:duration-200 " >Explore Now</Link>
                           </button>
 
                     </div>
-                    <img src="https://vodi.madrasthemes.com/main/wp-content/uploads/sites/2/2019/04/slider-1-1.jpg" />
+                    <img src="https://i.ibb.co.com/5523FTG/2.jpg" />
                 </SwiperSlide>
                 <SwiperSlide>
                 <div className='absolute top-[30%] md:top-[20%] md:left-[35%] left-[20%] space-y-4'>
-                        <h1 className='text-5xl text-white font-bold'>Black Mirror</h1>
-                        <ul className='flex text-[14px] text-white'>
-                            <li>2018</li> <div className='divider divider-horizontal  divider-primary'></div>
-                            <li>Action, Mystery</li> <div className='divider divider-horizontal  divider-primary'></div>
-                            <li>30 min</li>
-                            </ul>
+                        <h1 className='text-5xl text-white font-bold'>View Action & Drama Movies</h1>
+                       
                           <button>
 
-                            <Link  className=" px-6 py-3  mb-2 leading-loose  text-center text-black font-semibold bg-gradient-to-r  from-[#5FE1E7] to-[#D3F46D] uppercase  hover:opacity-70 hover:rounded-2xl hover:transform hover:duration-200 " href="#">Movie Details</Link>
+                            <a  className=" px-6 py-3  mb-2 leading-loose  text-center text-black font-semibold bg-gradient-to-r  from-[#5FE1E7] to-[#D3F46D] uppercase  hover:opacity-70 hover:rounded-2xl hover:transform hover:duration-200 " href="#actionDrama-id">Explore Now</a>
                           </button>
 
                     </div>
-                    <img src="https://vodi.madrasthemes.com/main/wp-content/uploads/sites/2/2019/04/slider-6-1.jpg" />
+                    <img src="https://i.ibb.co.com/JjMrvLL/3.jpg" />
                 </SwiperSlide>
 
             </Swiper>
@@ -96,13 +86,13 @@ const Banner = () => {
 
 
                 <SwiperSlide>
-                    <img src="https://vodi.madrasthemes.com/main/wp-content/uploads/sites/2/2019/04/slider-8-1.jpg" />
+                    <img src="https://i.ibb.co.com/0FmFMFt/1.jpg" />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src="https://vodi.madrasthemes.com/main/wp-content/uploads/sites/2/2019/04/slider-1-1.jpg" />
+                    <img src="https://i.ibb.co.com/t3CTk21/3.jpg" />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src="https://vodi.madrasthemes.com/main/wp-content/uploads/sites/2/2019/04/slider-6-1.jpg" />
+                    <img src="https://i.ibb.co.com/RgjsSJL/2.jpg" />
                 </SwiperSlide>
 
             </Swiper>

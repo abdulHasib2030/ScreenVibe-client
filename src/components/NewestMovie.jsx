@@ -5,7 +5,7 @@ const NewestMovie = ({ data }) => {
     const rated = data.sort((a, b) => b.rating - a.rating)
     
     return (
-        <div className='md:container mx-auto w-[90%] mb-32  mt-6'>
+        <div className='md:container mx-auto w-[90%] mb-32  mt-6' id='top-rated'>
             <div className='grid  lg:grid-cols-6 md:grid-cols-4  grid-cols-2 gap-3  ' >
 
                 <div className='md:order-2  gap-4 ml-5  md:col-span-2 col-span-2 '>
