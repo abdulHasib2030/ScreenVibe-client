@@ -50,7 +50,7 @@ const Banner = () => {
                         
                           <button>
 
-                            <Link to={`/my-favorite/${user?.email}`} className=" px-6 py-3  mb-2 leading-loose  text-center text-black font-semibold bg-gradient-to-r  from-[#5FE1E7] to-[#D3F46D] uppercase  hover:opacity-70 hover:rounded-2xl hover:transform hover:duration-200 " >Explore Now</Link>
+                            <Link to={`/my-favorite/${user?.email}`} state={{ title: `my-favorite` }}  className=" px-6 py-3  mb-2 leading-loose  text-center text-black font-semibold bg-gradient-to-r  from-[#5FE1E7] to-[#D3F46D] uppercase  hover:opacity-70 hover:rounded-2xl hover:transform hover:duration-200 " >Explore Now</Link>
                           </button>
 
                     </div>

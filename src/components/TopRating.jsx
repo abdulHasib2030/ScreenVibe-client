@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const NewestMovie = ({ data }) => {
+const TopRating = ({ data }) => {
     const rated = data.sort((a, b) => b.rating - a.rating)
     
     return (
@@ -20,7 +20,7 @@ const NewestMovie = ({ data }) => {
                 {
                     rated.slice(0, 4).map((item) => (
 
-                        <div className='md:order-1 cursor-pointer relative mb-16'>
+                        <div className='md:order-1 cursor-pointer relative   mb-28'>
                             <Link to={`/movie-details/${item._id}`}>
                                 <img src={item.poster} className='h-full hover:opacity-60' alt="" />
                                 <ul className="mt-2 text-sm text-gray-600 flex  gap-2">
@@ -45,7 +45,7 @@ const NewestMovie = ({ data }) => {
                 {
                     rated.slice(5, 11).map((item) => (
 
-                        <div className='md:order-1 cursor-pointer relative mb-16'>
+                        <div className='md:order-1 cursor-pointer relative  mb-28'>
                             <Link to={`/movie-details/${item._id}`}>
                                 <img src={item.poster} className='h-full hover:opacity-60' alt="" />
                                 <ul className="mt-2 text-sm text-gray-600 flex  gap-2">
@@ -57,7 +57,7 @@ const NewestMovie = ({ data }) => {
 
                                 </ul>
 
-                                <h4 className='text-xl'>{item.title}</h4>
+                                <h4 className='text-xl mb-3'>{item.title}</h4>
                             </Link>
                         </div>
 
@@ -73,4 +73,4 @@ const NewestMovie = ({ data }) => {
     );
 };
 
-export default NewestMovie;
+export default TopRating;

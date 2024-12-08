@@ -17,7 +17,6 @@ import { AuthContext } from '../provider/AuthProvider';
 const ActionAndDrama = ({data}) => {
   const [swiperRef, setSwiperRef] = useState(null);
   const { user} = useContext(AuthContext)
-  console.log(data.length);
   return (
     <>
       <section className="mb-10 relative md:-top-8 mt-6 md:mt-0 shadow-xl pb-4" id='actionDrama-id'>
@@ -47,7 +46,7 @@ const ActionAndDrama = ({data}) => {
 
           {data.map((item) => (
             <SwiperSlide>
-              <div key={item.id} className='cursor-pointer hover:opacity-70 hover:duration-500 hover:ease-in-out' >
+              <div key={item.id} className='cursor-pointer hover:opacity-70 hover:duration-500  hover:ease-in-out' >
  <Link state={{title:`movie-details/${item._id}`}} to={`/movie-details/${item._id}`}>
                 <figure>
                   <img src={item.poster}  className="w-full" />

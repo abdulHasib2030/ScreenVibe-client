@@ -17,7 +17,7 @@ const SignUp = () => {
         const photoUrl = form.photoUrl.value
         const email = form.email.value
         const password = form.password.value
-        // console.log(name, photUrl, email, password);
+
         const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
 
         if (name.length < 5) {
@@ -48,7 +48,7 @@ const SignUp = () => {
             .then(() =>{
                 toast.success("Successfully register account.")
                 if(location?.state.title === 'my-favorite'){
-                    console.log("Abdul Haisb");
+                  
                     navigate(`/${location.state.title}/${result.user.email}`)
                   }
                   else{
@@ -76,7 +76,14 @@ const SignUp = () => {
         googleAuth()
         .then(result => {
             setUser(result.user)
-             navigate('/')
+            if(location?.state?.title === 'my-favorite'){
+         
+                navigate(`/${location?.state?.title}/${result.user.email}`)
+              }
+              else{
+                navigate(location?.state?.title ? `/${location?.state?.title}` : '/')
+        
+              }
         })
         .catch(error =>{
             setError({user: error.message})

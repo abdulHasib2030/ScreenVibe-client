@@ -1,14 +1,22 @@
 import React, {useContext} from "react";
-import { Navigate, useLocation } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 
 
 const LoginRedirect = ({ children}) => {
   const {user} = useContext(AuthContext)
   const location = useLocation()
-  console.log(location.pathname)
+  const navigate = useNavigate()
+
   if (user) {
-    return <Navigate to={location?.state ? `/${location.state.id}` : '/'} />;
+    if(location?.state?.title === 'my-favorite'){
+         
+   return   navigate(`/${location.state.title}/${result.user.email}`)
+    }
+    else{
+   return   navigate(location?.state ? `/${location.state.title}` : '/')
+
+    }
   }
 
   return children;

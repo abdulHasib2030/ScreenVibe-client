@@ -15,7 +15,7 @@ const UpdateMovie = () => {
   const {_id, poster, title, genres, duration, year, summary} = loadData
   const [tempgenre, setTempGenres] = useState(genres)
   const [selectedYear, setSelectedYear] = useState(year ? new Date(year, 0) : '');
-  console.log(selectedYear);
+ 
   const {
     register,
     handleSubmit,
@@ -45,7 +45,7 @@ if (rating === 0){
         message: "Provide a valid URL link.",
       });
     }
-    console.log();
+ 
     if (!rating){
         return setError("rating", {
             type: "manual",
@@ -57,9 +57,10 @@ if (rating === 0){
         year: !selectedYear ? year :selectedYear.getFullYear() , 
         rating: rating, 
         summary:data.summary})
+        console.log(data.genre);
        
   
-    fetch(`http://localhost:5000/movie/update/${_id}`, {
+    fetch(`https://screen-vibe-rho.vercel.app/movie/update/${_id}`, {
         method: 'PUT',
         headers: {
             'content-type': 'application/json',
@@ -68,7 +69,7 @@ if (rating === 0){
     })
      .then(res => res.json())
      .then(data => {
-        console.log(data);
+   
         toast.success("Successfully Updated")
         navigate(`/movie-details/${_id}`)
      })
@@ -76,14 +77,12 @@ if (rating === 0){
   };
 
 
-const handleGenres = (e) =>{
 
-       setTempGenres([...tempgenre, e.target.value])
-       const genreId = document.getElementById('genre-id')
-
-       genreId.value = tempgenre
+const handleRemoveGenre = (gen) =>{
+  const flter = tempgenre.filter(g => g !== gen)
+ console.log(flter);
+  setTempGenres(flter)
 }
-
 
   return (
     <div>
@@ -124,7 +123,7 @@ const handleGenres = (e) =>{
             <div>
               <label className="text-white dark:text-gray-200">Choose a Genre</label>
               <select
-               onChange={(e)=>handleGenres(e)}
+               onChange={(e)=> !tempgenre.includes(e.target.value) && setTempGenres([...tempgenre, e.target.value])}
                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
               >
                 <option value="">Select a Genre</option>
@@ -149,17 +148,11 @@ const handleGenres = (e) =>{
             {/* selected Genre */}
             <div>
               <label className="text-white dark:text-gray-200">Selected Genres</label>
-              <input
-                {...register("genres", {
-                  required: "Genres is required"
-                })}
-                type="text"
-              
-              id='genre-id'
-               defaultValue={tempgenre}
-         
-                className="block  w-full py-2 px-4 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-              />
+              <div className='flex flex-wrap gap-3 list-none '>
+                {
+                  tempgenre.map(gen => <li>{gen} <span onClick={()=>handleRemoveGenre(gen)}  className='cursor-pointer text-red-500'>x</span></li>)
+                }
+              </div>
               {errors.genre && <p className="text-red-400">{errors.genre.message}</p>}
             </div>
 

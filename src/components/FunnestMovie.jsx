@@ -18,7 +18,7 @@ const FunnestMovie = ({data}) => {
             {
                 data.slice(0, 10).map((item)=>(
                    
-                    <div className=' cursor-pointer relative mb-16'>
+                    <div className=' cursor-pointer relative mb-28'>
                     <Link to={`/movie-details/${item._id}`}>
                         <img src={item.poster} className='h-full hover:opacity-60' alt="" />
                         <ul className="mt-2 text-sm text-gray-600 flex  gap-2">

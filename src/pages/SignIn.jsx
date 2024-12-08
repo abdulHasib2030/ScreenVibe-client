@@ -11,7 +11,7 @@ const SignIn = () => {
   //  const {id} = useParams()
    
 
- console.log(location.state);
+
   const handleUserLogin = (e) =>{
     e.preventDefault()
     const form = e.target;
@@ -22,7 +22,7 @@ const SignIn = () => {
       setUser(result.user)
       toast.success("Successfully login")
       if(location?.state?.title === 'my-favorite'){
-        console.log("Abdul Haisb");
+   
         navigate(`/${location.state.title}/${result.user.email}`)
       }
       else{
@@ -39,7 +39,14 @@ const SignIn = () => {
     googleAuth()
     .then(result => {
         setUser(result.user)
-         navigate('/')
+        if(location?.state?.title === 'my-favorite'){
+         
+          navigate(`/${location.state.title}/${result.user.email}`)
+        }
+        else{
+          navigate(location?.state ? `/${location.state.title}` : '/')
+  
+        }
     })
     .catch(error =>{
         setError({user: error.message})
@@ -87,7 +94,7 @@ const SignIn = () => {
 
       {/* <hr className="my-6 border-gray-300 w-full"> */}
 
-      <button onClick={handleGoogleAuth} className="w-full block bg-white hover:bg-gray-100 focus:bg-gray-100 text-gray-900 font-semibold rounded-lg px-4 py-3 border border-gray-300">
+      <button onClick={handleGoogleAuth}  className="w-full block bg-white hover:bg-gray-100 focus:bg-gray-100 text-gray-900 font-semibold rounded-lg px-4 py-3 border border-gray-300">
             <div className="flex items-center justify-center">
               
 			<FcGoogle />
@@ -98,7 +105,7 @@ const SignIn = () => {
             </div>
           </button>
 
-      <p className="mt-8">Need an account? <Link state={location.state} to={'/register'} className="text-blue-500 hover:text-blue-700 font-semibold">Create an
+      <p className="mt-8">Need an account? <Link state={location.state}  to={'/register'} className="text-blue-500 hover:text-blue-700 font-semibold">Create an
               account</Link></p>
 
 

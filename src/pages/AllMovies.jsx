@@ -23,7 +23,7 @@ const AllMovies = () => {
             <div className=' md:container mx-auto w-[90%]'>
             <h1 className='text-4xl font-bold'>All Movies</h1>
 
-                <label className="input input-bordered flex mt-4 items-center gap-2">
+                <label className="input input-bordered flex mt-4 p-2 items-center gap-2">
                  Search by title
                     <input type="text" onChange={(e)=> setSearch(e.target.value)} value={search} className="grow"  />
                     <svg
@@ -57,12 +57,12 @@ const AllMovies = () => {
                                     </div>
                                     <div className='rating-container'> <span className=' font-semibold text-black'> Rating:</span>
 
-                                        <Rating size={30} initialValue={item.rating} tooltipArray={['Terrible', 'Bad', 'Average', 'Great', 'Prefect']}
+                                        <Rating size={20} initialValue={item.rating} tooltipArray={['Terrible', 'Bad', 'Average', 'Great', 'Prefect']}
                                             readonly showTooltip
                                         ></Rating>
 
                                     </div>
-                                    <Link state={{ title: `movie-details/${item._id}` }} to={`/movie-details/${item._id}`} className="block px-4 py-1 my-3   text-center text-white font-semibold  bg-[#333333]  hover:opacity-70 hover:rounded-2xl hover:transform hover:duration-200 ">See Detail</Link>
+                                    <Link   state={{ title: `movie-details/${item._id}` }} to={`/movie-details/${item._id}`} className="block px-4 py-1 my-3   text-center text-white font-semibold  bg-[#333333]  hover:opacity-70 hover:rounded-2xl hover:transform hover:duration-200 ">See Detail</Link>
 
 
 

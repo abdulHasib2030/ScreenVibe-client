@@ -36,6 +36,7 @@ const AuthProvider = ({children}) => {
     }
 
     const userLogin = (email, password) =>{
+     
         return signInWithEmailAndPassword(auth, email, password)
     }
 

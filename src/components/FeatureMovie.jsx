@@ -4,9 +4,7 @@ import { Rating } from 'react-simple-star-rating';
 
 const FeatureMovie = ({data}) => {
     const sortData = data.sort((a, b)=> b.rating - a.rating)
-    sortData.map(item =>{
-        console.log(item.rating);
-    })
+   
     return (
         <div className='relative md:-top-24 mt-6 md:mt-0'>
             <h1 className='text-center text-5xl  font-bold font bottom-0  '>Features Movie
@@ -35,7 +33,7 @@ const FeatureMovie = ({data}) => {
                             </div>
                             <div className='rating-container'> <span className=' font-semibold text-black'> Rating:</span> 
         
-                            <Rating size={30} initialValue={item.rating} tooltipArray={['Terrible', 'Bad', 'Average', 'Great', 'Prefect']}
+                            <Rating size={20} initialValue={item.rating} tooltipArray={['Terrible', 'Bad', 'Average', 'Great', 'Prefect']}
                              readonly  showTooltip
                             ></Rating>
 
