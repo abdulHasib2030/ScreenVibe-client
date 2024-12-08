@@ -20,8 +20,8 @@ const ActionAndDrama = ({data}) => {
   console.log(data.length);
   return (
     <>
-      <section className="mb-10 relative md:-top-24 mt-6 md:mt-0 shadow-xl pb-4">
-        <div className='md:container mx-auto my-10'>
+      <section className="mb-10 relative md:-top-8 mt-6 md:mt-0 shadow-xl pb-4">
+        <div className='md:container mx-auto my-10 w-[90%]'>
 
         
        
@@ -33,14 +33,14 @@ const ActionAndDrama = ({data}) => {
           centeredSlides={true}
           spaceBetween={30}
 
-          loop={true} // Enable infinite loop
+          loop={true} 
           autoplay={{
-            delay: 5000, // Set autoplay delay in milliseconds
-            disableOnInteraction: false, // Autoplay will not stop when the user interacts
+            delay: 5000, 
+            disableOnInteraction: false, 
           }}
           navigation={true}
           modules={[Pagination, Navigation, Autoplay]}
-          className="md:container mx-auto w-[90%]"
+          className=""
           
         >
 
@@ -58,7 +58,7 @@ const ActionAndDrama = ({data}) => {
                       <li className="">
                      {item.year},
                       </li>
-                      <li>{item.genre}</li>
+                      <li className='flex'>{item.genres.map((gen, idx)=> <li>{gen}{idx === item.genres.length-1? '': ','}</li>)}</li>
                   
                   </ul>
                   
