@@ -122,7 +122,7 @@ const Navbar = () => {
                 {
                     user ?
                         <div className='  hidden lg:inline-block '>
-                            <div className=" flex gap-5">
+                            <div className=" flex gap-7">
                                 <label className="swap swap-rotate">
                                     {/* this hidden checkbox controls the state */}
                                     <input type="checkbox" className="theme-controller" value="light" />
@@ -152,9 +152,10 @@ const Navbar = () => {
                                             <img src={user?.photoURL} alt="not found user profile" />
                                         </div>
                                      
-                                        <div className="absolute  w-24 text-white text-sm px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                        <div className="absolute  text-white text-sm  rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                             {user?.displayName}
                                         </div>
+
                                     </div>
                                 </div>
                                 <button onClick={handleUserLogout} className="hidden lg:inline-block py-2 px-6 bg-gradient-to-r  from-[#5FE1E7] to-[#D3F46D] text-black font-bold  transition duration-200">

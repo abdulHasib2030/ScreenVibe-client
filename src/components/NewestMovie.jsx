@@ -28,7 +28,7 @@ const NewestMovie = ({ data }) => {
                                     <li className="">
                                         {item.year}
                                     </li>
-                                    <li className='flex'>{item.genres.map((gen, idx) => <li>{gen}{idx === item.genres.length - 1 ? '' : ','}</li>)}</li>
+                                    <li className='flex flex-wrap'>{item.genres.map((gen, idx) => <li>{gen}{idx === item.genres.length - 1 ? '' : ','}</li>)}</li>
 
                                 </ul>
 
@@ -53,7 +53,7 @@ const NewestMovie = ({ data }) => {
                                     <li className="">
                                         {item.year}
                                     </li>
-                                    <li className='flex'>{item.genres.map((gen, idx) => <li>{gen}{idx === item.genres.length - 1 ? '' : ','}</li>)}</li>
+                                    <li className='flex flex-wrap'>{item.genres.map((gen, idx) => <li>{gen}{idx === item.genres.length - 1 ? '' : ','}</li>)}</li>
 
                                 </ul>
 

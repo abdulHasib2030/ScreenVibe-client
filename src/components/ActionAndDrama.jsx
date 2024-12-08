@@ -21,7 +21,7 @@ const ActionAndDrama = ({data}) => {
   return (
     <>
       <section className="mb-10 relative md:-top-8 mt-6 md:mt-0 shadow-xl pb-4" id='actionDrama-id'>
-        <div className='md:container mx-auto my-10 w-[90%]'>
+        <div className='md:container mx-auto my-10 w-[90%] '>
 
         
        
@@ -47,18 +47,18 @@ const ActionAndDrama = ({data}) => {
 
           {data.map((item) => (
             <SwiperSlide>
-              <div key={item.id} className='cursor-pointer hover:opacity-70 hover:duration-500 hover:ease-in-out ' >
+              <div key={item.id} className='cursor-pointer hover:opacity-70 hover:duration-500 hover:ease-in-out' >
  <Link state={{title:`movie-details/${item._id}`}} to={`/movie-details/${item._id}`}>
                 <figure>
-                  <img src={item.poster}  className="w-full object-cover" />
+                  <img src={item.poster}  className="w-full" />
                 </figure>
                 <div className="pl-2">
-                <ul className="mt-2 text-sm text-gray-600 flex  gap-2">
+                <ul className="mt-2 text-sm text-start text-gray-600 md:flex  gap-2">
                     
                       <li className="">
                      {item.year},
                       </li>
-                      <li className='flex'>{item.genres.map((gen, idx)=> <li>{gen}{idx === item.genres.length-1? '': ','}</li>)}</li>
+                      <li className='md:flex flex-wrap'>{item.genres.map((gen, idx)=> <li>{gen}{idx === item.genres.length-1? '': ','}</li>)}</li>
                   
                   </ul>
                   

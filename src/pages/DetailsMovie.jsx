@@ -103,7 +103,7 @@ const DetailsMovie = () => {
 
                         <div className="ml-4 space-y-6 mt-3 md:mt-0 lg:w-1/2">
                             <h1 className="text-2xl font-bold text-white">Movie title: <span className='text-xl text-gray-400'>{title}</span></h1>
-                            <h1 className=' flex items-center gap-2 text-2xl font-bold text-white'>Genre: <span className=' text-xl text-gray-400 flex'> {genres.map((gen,idx)=> <li className='list-none'>{gen}{idx === genres.length-1? '': ','}</li>)}</span></h1>
+                            <h1 className=' flex items-center gap-2 text-2xl  font-bold text-white'>Genre: <span className=' text-xl text-gray-400 flex flex-wrap'> {genres.map((gen,idx)=> <li className='list-none'>{gen}{idx === genres.length-1? '': ','}</li>)}</span></h1>
 
                             <h1 className="text-2xl font-bold text-white">Movie duration: <span className='text-xl text-gray-400'>{duration}</span></h1>
                             <h1 className="text-2xl font-bold text-white">Movie Release Year : <span className='text-xl text-gray-400'>{year}</span></h1>
