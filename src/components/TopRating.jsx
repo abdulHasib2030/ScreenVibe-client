@@ -8,7 +8,7 @@ const TopRating = ({ data }) => {
         <div className='md:container mx-auto w-[90%] mb-32  mt-6' id='top-rated'>
             <div className='grid  lg:grid-cols-6 md:grid-cols-4  grid-cols-2 gap-3  ' >
 
-                <div className='md:order-2  gap-4 ml-5  md:col-span-2 col-span-2 '>
+                <div className='lg:order-2  gap-4 ml-5 md:col-span-4 lg:col-span-2 col-span-2 '>
 
                     <div className='flex order-1 flex-col items-center justify-center h-full'>
                         <h1 className='text-start text-4xl font-bold '>Top Rating Movie</h1>
@@ -20,7 +20,7 @@ const TopRating = ({ data }) => {
                 {
                     rated.slice(0, 4).map((item) => (
 
-                        <div className='md:order-1 cursor-pointer relative   mb-28'>
+                        <div className='lg:order-1 cursor-pointer relative   mb-28'>
                             <Link to={`/movie-details/${item._id}`}>
                                 <img src={item.poster} className='h-full hover:opacity-60' alt="" />
                                 <ul className="mt-2 text-sm text-gray-600 flex  gap-2">

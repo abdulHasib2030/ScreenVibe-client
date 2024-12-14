@@ -53,7 +53,7 @@ const Navbar = () => {
             setNavActive(temp)
         }
     }
-    console.log(navActive[0]);
+   
     return (
         <div className='shadow-lg'>
             <nav className="relative   flex justify-between items-center w-11/12 mx-auto py-4 ">

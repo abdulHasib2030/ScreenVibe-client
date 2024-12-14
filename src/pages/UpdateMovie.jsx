@@ -58,7 +58,7 @@ if (rating === 0){
         year: !selectedYear ? year :selectedYear.getFullYear() , 
         rating: rating, 
         summary:data.summary})
-        console.log(data.genre);
+      
        
   
     fetch(`https://screen-vibe-rho.vercel.app/movie/update/${_id}`, {
@@ -81,7 +81,7 @@ if (rating === 0){
 
 const handleRemoveGenre = (gen) =>{
   const flter = tempgenre.filter(g => g !== gen)
- console.log(flter);
+
   setTempGenres(flter)
 }
 
