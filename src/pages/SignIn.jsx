@@ -54,7 +54,7 @@ const SignIn = () => {
     })
 }
     return (
-        <div>
+        <div className='my-32'>
         
         <Helmet>
         <title>Login</title>

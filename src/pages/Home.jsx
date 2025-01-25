@@ -6,6 +6,7 @@ import ActionAndDrama from '../components/ActionAndDrama';
 import FunnestMovie from '../components/FunnestMovie';
 import TopRating from '../components/TopRating';
 import { Helmet } from 'react-helmet-async';
+import Category from '../components/Category';
 
 
 const Home = () => {
@@ -23,7 +24,7 @@ const Home = () => {
         <title>ScreenVibe | Home</title>
       </Helmet>
             <Banner></Banner>
-           
+           <Category data={data1}></Category>
             <FeatureMovie data={data2}></FeatureMovie>
             <ActionAndDrama data={data1.actionDrama}></ActionAndDrama>
             <FunnestMovie data={comedy}></FunnestMovie>

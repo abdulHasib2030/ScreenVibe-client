@@ -19,7 +19,7 @@ const Favorites = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`https://screen-vibe-rho.vercel.app/favorite-delete/${id}`, {
+                fetch(`http://localhost:5000/favorite-delete/${id}`, {
                     method: 'DELETE',
                 })
                     .then(res => res.json())
@@ -39,7 +39,7 @@ const Favorites = () => {
         })
     }
     return (
-        <div className='my-20'>
+        <div className='my-32'>
             <Helmet>
                 <title>Favorites Movies</title>
             </Helmet>
@@ -50,7 +50,7 @@ const Favorites = () => {
                     loadData.length > 0 ?
                         <div className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-14 items-center'>
                             {loadData.map(item =>
-                                <div className="card card-compact text-black   bg-gradient-to-r  to-[#5FE1E7] from-[#D3F46D] rounded-none  duration-300 ease-in-out transition-transform transform hover:-translate-y-2 ">
+                                <div className="card card-compact text-white rounded-none  duration-300 ease-in-out transition-transform transform hover:-translate-y-2 ">
                                     <figure>
                                         <img className='h-96 w-full mx-auto hover:opacity-70 transition-opacity'
                                             src={item.poster}
@@ -59,12 +59,12 @@ const Favorites = () => {
                                     <div className=" px-2 py-2 pb-0 ">
                                         <h2 className="card-title text-2xl">{item.title}</h2>
                                         <div className='   '>
-                                            <p className='flex gap-1 flex-wrap'> <span className=' font-semibold text-black'>Genre:</span> {item.genres.map((gen, idx) => <li className='list-none'>{gen}{idx === item.genres.length - 1 ? '' : ','}</li>)}</p>
+                                            <p className='flex gap-1 flex-wrap'> <span className=' font-semibold '>Genre:</span> {item.genres.map((gen, idx) => <li className='list-none'>{gen}{idx === item.genres.length - 1 ? '' : ','}</li>)}</p>
 
-                                            <p> <span className=' font-semibold text-black'> Duration:</span> {item.duration} minutes</p>
-                                            <p> <span className=' font-semibold text-black'> Release Year:</span> {item.year}</p>
+                                            <p> <span className=' font-semibold '> Duration:</span> {item.duration} minutes</p>
+                                            <p> <span className=' font-semibold '> Release Year:</span> {item.year}</p>
                                         </div>
-                                        <div className='rating-container'> <span className=' font-semibold text-black'> Rating:</span>
+                                        <div className='rating-container'> <span className=' font-semibold '> Rating:</span>
 
                                             <Rating size={30} initialValue={item.rating} tooltipArray={['Terrible', 'Bad', 'Average', 'Great', 'Prefect']}
                                                 readonly showTooltip

@@ -15,14 +15,15 @@ import Favorites from "../pages/Favorites";
 import Home from "../pages/Home";
 import Contact from "../pages/Contact";
 import UpdateMovie from "../pages/UpdateMovie";
+import About from "../pages/About";
 
 const loader1 = async () => {
-    const response = await fetch("https://screen-vibe-rho.vercel.app/all-movies");
+    const response = await fetch("http://localhost:5000/all-movies");
     return response.json();
 };
 
 const loader2 = async () => {
-    const response = await fetch('https://screen-vibe-rho.vercel.app');
+    const response = await fetch('http://localhost:5000');
 
     return response.json();
 };
@@ -50,6 +51,10 @@ const Route = createBrowserRouter([
                 </PrivateRoute>,
             },
             {
+                path: '/about-us',
+                element: <About />,
+            },
+            {
                 path: '/login',
                 element:    <LoginRedirect>
                 <SignIn></SignIn>
@@ -64,21 +69,21 @@ const Route = createBrowserRouter([
             {
                 path: '/all-movies',
                 element: <AllMovies></AllMovies>,
-                loader: () => fetch('https://screen-vibe-rho.vercel.app/all-movies'),
+                loader: () => fetch('http://localhost:5000/all-movies'),
             },
             {
                 path: '/movie-details/:id',
                 element: <PrivateRoute>
                     <DetailsMovie></DetailsMovie>
                 </PrivateRoute>,
-                loader: ({ params }) => fetch(`https://screen-vibe-rho.vercel.app/movie-details/${params.id}`),
+                loader: ({ params }) => fetch(`http://localhost:5000/movie-details/${params.id}`),
             },
             {
                 path: '/my-favorite/:email',
                 element: <PrivateRoute>
                     <Favorites></Favorites>
                 </PrivateRoute>,
-                loader: ({ params }) => fetch(`https://screen-vibe-rho.vercel.app/my-favorite/${params.email}`),
+                loader: ({ params }) => fetch(`http://localhost:5000/my-favorite/${params.email}`),
             },
             {
                 path: '/contact',
@@ -89,7 +94,7 @@ const Route = createBrowserRouter([
                 element: <PrivateRoute>
                     <UpdateMovie></UpdateMovie>
                 </PrivateRoute> ,
-                loader: ({params}) => fetch(`https://screen-vibe-rho.vercel.app/movie-details/${params.id}`),
+                loader: ({params}) => fetch(`http://localhost:5000/movie-details/${params.id}`),
 
             }
         ]

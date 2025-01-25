@@ -25,7 +25,7 @@ const Contact = () => {
     }
 
     return (
-        <div>
+        <div className='my-32'>
             <Helmet>
                 <title>Contact</title>
             </Helmet>
@@ -67,7 +67,7 @@ const Contact = () => {
                     </div>
 
                     <div className="flex justify-start mt-6">
-                        <button className="px-8 py-2 leading-5 text-black font-bold text-xl transition-colors duration-200 transform bg-gradient-to-r  from-[#5FE1E7] to-[#D3F46D] hover:bg-pink-700 focus:outline-none focus:bg-gray-600">Submit</button>
+                        <button className="px-8 py-2 leading-5  font-bold text-xl transition-colors duration-200 transform bg-gradient-to-r   to-gray-400 from-gray-600  text-white hover:bg-pink-700 focus:outline-none focus:bg-gray-600">Submit</button>
                     </div>
                 </form>
             </section>

@@ -70,7 +70,7 @@ const AddMovie = () => {
         const email = user.email
         const newMovie = { poster, title, genres, duration, year, rating, summary, email }
 
-        fetch('https://screen-vibe-rho.vercel.app/add-movie', {
+        fetch('http://localhost:5000/add-movie', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -90,7 +90,7 @@ const AddMovie = () => {
  
 
     return (
-        <div>
+        <div className='my-32'>
              <Helmet>
         <title>Add Movie</title>
       </Helmet>
@@ -222,7 +222,7 @@ const AddMovie = () => {
                     </div>
 
                     <div className="flex justify-start mt-6">
-                        <button className="px-8 py-2 leading-5 text-black font-bold text-xl transition-colors duration-200 transform bg-gradient-to-r  from-[#5FE1E7] to-[#D3F46D] hover:bg-pink-700 focus:outline-none focus:bg-gray-600">Add Movie</button>
+                        <button className="px-8 py-2 leading-5 text-black font-bold text-xl transition-colors duration-200 transform bg-gradient-to-r  from-gray-600 to-gray-400 hover:bg-pink-700 focus:outline-none focus:bg-gray-600">Add Movie</button>
                     </div>
                 </form>
             </section>

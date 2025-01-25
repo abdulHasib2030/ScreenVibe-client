@@ -11,7 +11,7 @@ const AllMovies = () => {
 
 
     useEffect(() => {
-        fetch(`https://screen-vibe-rho.vercel.app/all-movies?searchParams=${search}`)
+        fetch(`http://localhost:5000/all-movies?searchParams=${search}`)
             .then((res) => res.json())
             .then((searchData) => {
                 setData(searchData.result);
@@ -20,7 +20,7 @@ const AllMovies = () => {
     }, [search]);
 
     return (
-        <div className='my-20'>
+        <div className='my-32 text-white'>
             <Helmet>
                 <title>All Movies</title>
             </Helmet>
@@ -46,20 +46,20 @@ const AllMovies = () => {
                     {
                         data.length > 0 ?
                             data.map(item =>
-                                <div key={item._id} className="card card-compact text-black   bg-gradient-to-r  to-[#5FE1E7] from-[#D3F46D] rounded-none  duration-300 ease-in-out transition-transform transform hover:-translate-y-2 ">
+                                <div key={item._id} className="card card-compact    rounded-none  duration-300 ease-in-out transition-transform transform hover:-translate-y-2 ">
                                     <figure>
                                         <img className='h-96 w-full mx-auto hover:opacity-70 transition-opacity'
                                             src={item.poster}
                                             alt="Shoes" />
                                     </figure>
-                                    <div className=" px-2 py-2 pb-0 ">
+                                    <div className=" px-2 py-2 pb-0 text-white">
                                         <h2 className="card-title text-2xl">{item.title}</h2>
                                         <div className='   '>
-                                            <p className='flex flex-wrap gap-1'> <span className=' font-semibold text-black'>Genre:</span> {item.genres.map((gen, idx) => <li className='list-none'>{gen}{idx === item.genres.length - 1 ? '' : ','}</li>)}</p>
-                                            <p> <span className=' font-semibold text-black'> Duration:</span> {item.duration} minutes</p>
-                                            <p> <span className=' font-semibold text-black'> Release Year:</span> {item.year}</p>
+                                            <p className='flex flex-wrap gap-1'> <span className=' font-semibold '>Genre:</span> {item.genres.map((gen, idx) => <li className='list-none'>{gen}{idx === item.genres.length - 1 ? '' : ','}</li>)}</p>
+                                            <p> <span className=' font-semibold '> Duration:</span> {item.duration} minutes</p>
+                                            <p> <span className=' font-semibold '> Release Year:</span> {item.year}</p>
                                         </div>
-                                        <div className='rating-container'> <span className=' font-semibold text-black'> Rating:</span>
+                                        <div className='rating-container'> <span className=' font-semibold '> Rating:</span>
 
                                             <Rating size={20} initialValue={item.rating} tooltipArray={['Terrible', 'Bad', 'Average', 'Great', 'Prefect']}
                                                 readonly showTooltip

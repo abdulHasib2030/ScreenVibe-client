@@ -7,7 +7,9 @@ import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
-import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
+
+import { Autoplay, FreeMode, Navigation, Thumbs } from 'swiper/modules';
+
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../provider/AuthProvider';
 
@@ -17,10 +19,61 @@ const Banner = () => {
     const {user} = useContext(AuthContext)
 
     return (
-        <div >
+        <div className='mx-auto w-full'>
 
 
+      <Swiper
+        style={{
+          '--swiper-navigation-color': '#fff',
+          '--swiper-pagination-color': '#fff',
+        }}
+        loop={true}
+        spaceBetween={10}
+        navigation={true}
+        thumbs={{ swiper: thumbsSwiper }}
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }}
+        modules={[FreeMode, Navigation, Thumbs, Autoplay]}
+        className="mySwiper2 w-full"
+      >
+        <SwiperSlide>
+        <img src="https://i.ibb.co.com/Fk1Rhcj/1.jpg" className='w-full' />
+        </SwiperSlide>
+        <SwiperSlide>
+        <img src="https://i.ibb.co.com/5523FTG/2.jpg" className='w-full' />
+        </SwiperSlide>
+        <SwiperSlide>
+        <img src="https://i.ibb.co.com/JjMrvLL/3.jpg" className='w-full' />
+        </SwiperSlide>
+        
+      </Swiper>
+      <Swiper
+        onSwiper={setThumbsSwiper}
+        loop={true}
+        spaceBetween={10}
+        slidesPerView={4}
+        freeMode={true}
+        watchSlidesProgress={true}
+        modules={[FreeMode, Navigation, Thumbs]}
+        className="mySwiper"
+      >
+        <SwiperSlide>
+        <img src="https://i.ibb.co.com/Fk1Rhcj/1.jpg"  />
+        </SwiperSlide>
+        <SwiperSlide>
+        <img src="https://i.ibb.co.com/5523FTG/2.jpg"  />
+        </SwiperSlide>
+        <SwiperSlide>
+        <img src="https://i.ibb.co.com/JjMrvLL/3.jpg"  />
+        </SwiperSlide>
+  
+      </Swiper>
+ 
 
+
+{/* 
             <Swiper
                 style={{
                     '--swiper-navigation-color': '#fff',
@@ -81,7 +134,7 @@ const Banner = () => {
                 freeMode={true}
                 watchSlidesProgress={true}
                 modules={[FreeMode, Navigation, Thumbs]}
-                className="md:w-1/2  absolute lg:h-44 md:h-32 h-32  md:-top-60 md:-right-44 lg:-right-56 object-cover"
+                className=" absolute   md:-top-60 md:-right-44 lg:-right-56 object-contain w-auto"
             >
 
 
@@ -96,7 +149,7 @@ const Banner = () => {
                 </SwiperSlide>
 
             </Swiper>
-            </div>
+            </div> */}
 
         </div>
     );

@@ -61,7 +61,7 @@ if (rating === 0){
       
        
   
-    fetch(`https://screen-vibe-rho.vercel.app/movie/update/${_id}`, {
+    fetch(`http://localhost:5000/movie/update/${_id}`, {
         method: 'PUT',
         headers: {
             'content-type': 'application/json',
@@ -86,7 +86,7 @@ const handleRemoveGenre = (gen) =>{
 }
 
   return (
-    <div>
+    <div className='my-32'>
        <Helmet>
         <title>Update Movie {title}</title>
       </Helmet>
@@ -231,7 +231,7 @@ const handleRemoveGenre = (gen) =>{
           </div>
 
           <div className="flex justify-start mt-6">
-            <button className="px-8 py-2 leading-5 text-black font-bold text-xl transition-colors duration-200 transform bg-gradient-to-r from-[#5FE1E7] to-[#D3F46D] hover:bg-pink-700 focus:outline-none focus:bg-gray-600">
+            <button className="px-8 py-2 leading-5 text-black font-bold text-xl transition-colors duration-200 transform bg-gradient-to-r from-gray-400 to-gray-600 hover:bg-pink-700 focus:outline-none focus:bg-gray-600">
               Update Movie
             </button>
           </div>
